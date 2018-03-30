@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">FoodPark</string>
+    <string name="txtslogan">Deliciousness jumping into the mouth</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="app_exit_text">Are you sure you want to exit?</string>
+    <string name="hint_serach_bar">Enter your Food</string>
+</resources>
