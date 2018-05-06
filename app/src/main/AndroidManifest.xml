@@ -12,11 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activities.SignInActivity" />
         <activity android:name=".activities.SignUpActivity" />
@@ -27,7 +23,14 @@
         <activity android:name=".activities.FoodListActivity" />
         <activity android:name=".activities.FoodDetailsActivity" />
         <activity android:name=".activities.CartActivity" />
-        <activity android:name=".activities.OrderStatusActivity"></activity>
+        <activity android:name=".activities.OrderStatusActivity" />
+        <activity android:name=".splashScreen.SplashLoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

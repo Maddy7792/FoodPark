@@ -4,74 +4,195 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/my_bg"
+    android:background="@color/screenBackground"
     tools:context="com.foodpark.activities.SignUpActivity">
-    <LinearLayout
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/fp_signup_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/fp_signup_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/white"
+            android:theme="@style/SearchViewStyle">
+
+            <ImageView
+                android:id="@+id/fp_tv_signup_toolbar_back"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/back_arrow" />
+
+            <TextView
+                android:id="@+id/fp_tv_signup_toolbar_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView
+        android:id="@+id/fp_tv_validation_error"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:orientation="vertical">
+        android:layout_below="@+id/fp_signup_app_bar"
+        android:fontFamily="@font/magettas_regular"
+        android:gravity="center"
+        android:padding="20dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="15sp" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/et_phone_number"
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fp_tv_validation_error"
+        app:cardElevation="0dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone Number"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
-            android:text="07013123382"
-            android:textSize="34sp"
-            android:inputType="phone"
-            app:met_baseColor="@android:color/white"
-            app:met_floatingLabel="highlight"
-            app:met_maxCharacters="11"
-            app:met_primaryColor="@android:color/white"
-            app:met_singleLineEllipsis="true"/>
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/et_Name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Name"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
-            android:text="Madhan"
-            android:textSize="34sp"
-            android:inputType="text"
-            app:met_baseColor="@android:color/white"
-            app:met_floatingLabel="highlight"
-            app:met_maxCharacters="11"
-            app:met_primaryColor="@android:color/white"
-            app:met_singleLineEllipsis="true"/>
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/et_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
-            android:text="12345"
-            android:textSize="34sp"
-            android:inputType="textPassword"
-            app:met_baseColor="@android:color/white"
-            app:met_floatingLabel="highlight"
-            app:met_maxCharacters="11"
-            app:met_primaryColor="@android:color/white"
-            app:met_singleLineEllipsis="true"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-    </LinearLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:theme="@style/TextLabel">
+
+                    <EditText
+                        android:id="@+id/et_Name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_first_name"
+                        android:inputType="text"
+                        android:padding="15dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:theme="@style/TextLabel">
+
+                    <EditText
+                        android:id="@+id/et_SurName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_surname"
+                        android:inputType="text"
+                        android:padding="15dp"
+                        android:textColor="@android:color/black"
+                        android:textCursorDrawable="@color/colorGreen"
+                        android:textSize="20sp" />
+                </android.support.design.widget.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/TextLabel">
+
+                <EditText
+                    android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_email"
+                    android:inputType="textEmailAddress"
+                    android:padding="15dp"
+                    android:textColor="@android:color/black"
+                    android:textCursorDrawable="@color/colorGreen"
+                    android:textSize="20sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <Spinner
+                    android:id="@+id/fp_country_code"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.3"
+                    android:gravity="center" />
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:theme="@style/TextLabel">
+
+                    <EditText
+                        android:id="@+id/et_phone_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_phone_number"
+                        android:inputType="phone"
+                        android:padding="15dp"
+                        android:textColor="@android:color/black"
+                        android:textCursorDrawable="@color/colorGreen"
+                        android:textSize="20sp" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/TextLabel">
+
+                <EditText
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_password"
+                    android:inputType="textPassword"
+                    android:padding="15dp"
+                    android:textColor="@android:color/black"
+                    android:textCursorDrawable="@color/colorGreen"
+                    android:textSize="20sp" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
 
     <Button
+        android:id="@+id/btn_signup_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:text="Sign Up"
-        android:id="@+id/btn_signup_activity"
+        android:layout_alignParentBottom="true"
         android:layout_margin="8dp"
-        android:background="@color/btnSignupActive"
+        android:background="@color/colorGreen"
         android:fontFamily="@font/verdana"
         android:shadowColor="@android:color/black"
-        android:layout_alignParentBottom="true"/>
+        android:text="@string/sign_up"
+        android:textColor="@android:color/white" />
 </RelativeLayout>
