@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.foodpark.R;
-import com.foodpark.activities.SignInActivity;
-import com.foodpark.activities.SignUpActivity;
+import com.foodpark.auth.SignInActivity;
+import com.foodpark.auth.SignUpActivity;
 
 public class SplashLoginActivity extends AppCompatActivity implements View.OnClickListener {
 

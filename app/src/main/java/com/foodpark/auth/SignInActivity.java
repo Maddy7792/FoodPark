@@ -1,4 +1,4 @@
-package com.foodpark.activities;
+package com.foodpark.auth;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,13 +17,13 @@ import android.support.v7.widget.Toolbar;
 import com.foodpark.Common.Common;
 import com.foodpark.R;
 import com.foodpark.Utils.Validation;
+import com.foodpark.activities.NavigationActivity;
 import com.foodpark.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
 

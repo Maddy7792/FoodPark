@@ -24,7 +24,7 @@
     <string name="hint_surname">SurName</string>
     <string name="hint_first_name">First Name</string>
     <string name="sign_up">Sign Up</string>
-
+    <string name="filter_reset">RESET</string>
 
 
     <string-array name="countryCodes">

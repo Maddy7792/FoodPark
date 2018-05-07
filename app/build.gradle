@@ -44,5 +44,6 @@ dependencies {
     compile 'com.github.mancj:MaterialSearchBar:0.7.6'
 
 
+
 }
 apply plugin: 'com.google.gms.google-services'

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/screenBackground"
-    tools:context="com.foodpark.activities.SignUpActivity">
+    tools:context="com.foodpark.auth.SignUpActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/fp_signup_app_bar"
@@ -193,6 +193,6 @@
         android:background="@color/colorGreen"
         android:fontFamily="@font/verdana"
         android:shadowColor="@android:color/black"
-        android:text="@string/sign_up"
+        android:text="@string/register"
         android:textColor="@android:color/white" />
 </RelativeLayout>

@@ -25,4 +25,6 @@ public class AppConstants {
     public static final String VALID_SUR_NAME = "Enter Valid SurName";
     public static final String VALID_PHONE = "Enter Valid Phone Number";
     public static final String VALID_PASSWORD = "Enter Valid Password";
+
+    public static final String WIDTH = "width";
 }

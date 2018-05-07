@@ -1,4 +1,4 @@
-package com.foodpark.activities;
+package com.foodpark.auth;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +23,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener,
         AdapterView.OnItemSelectedListener {
@@ -94,7 +93,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(SignUpActivity.this, "Phone Number already registered", Toast.LENGTH_SHORT).show();
                 } else {
                     mDailog.dismiss();
-                    User user = new User(etName.getText().toString(), etPassword.getText().toString());
+                    User user = new User(etName.getText().toString(),
+                            etPassword.getText().toString(),
+                            etSurName.getText().toString(),
+                            etEmail.getText().toString());
                     table_user.child(etPhoneNumber.getText().toString()).setValue(user);
                     Toast.makeText(SignUpActivity.this, "SignUp Successfully", Toast.LENGTH_SHORT).show();
                     finish();
