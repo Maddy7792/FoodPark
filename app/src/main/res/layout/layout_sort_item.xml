@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <ImageView
+        android:id="@+id/fp_iv_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:padding="5dp"
+        android:src="@drawable/recommended" />
+
+    <CheckedTextView
+        android:id="@+id/fp_sort_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/fp_iv_icon"
+        android:checked="false"
+        android:fontFamily="@font/magettas_regular"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="@string/checked_filter"
+        android:textSize="16sp" />
+
+</RelativeLayout>

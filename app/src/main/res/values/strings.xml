@@ -25,6 +25,8 @@
     <string name="hint_first_name">First Name</string>
     <string name="sign_up">Sign Up</string>
     <string name="filter_reset">RESET</string>
+    <string name="checked_filter">Filter</string>
+    <string name="filter_finished">Finished</string>
 
 
     <string-array name="countryCodes">
@@ -235,4 +237,14 @@
         <item>260,ZM</item>
         <item>263,ZW</item>
     </string-array>
+
+
+    <string name="single">\u20B9</string>
+    <string name="doublerupess">\u20B9\u20B9</string>
+    <string name="triple">\u20B9\u20B9\u20B9</string>
+    <string name="four">\u20B9\u20B9\u20B9\u20B9</string>
+    <string name="categories_title">title</string>
+    <string name="top_categories">Top Categories</string>
+    <string name="more_categories">More Categories</string>
+
 </resources>

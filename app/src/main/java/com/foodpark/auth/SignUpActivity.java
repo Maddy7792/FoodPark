@@ -87,7 +87,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         table_user.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 if (dataSnapshot.child(etPhoneNumber.getText().toString()).exists()) {
                     mDailog.dismiss();
                     Toast.makeText(SignUpActivity.this, "Phone Number already registered", Toast.LENGTH_SHORT).show();

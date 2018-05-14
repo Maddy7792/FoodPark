@@ -73,12 +73,10 @@ public class NavigationActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         tvFullName = (TextView) headerView.findViewById(R.id.txtFullName);
         tvFullName.setText(Common.currentUser.getName());
-
         recycler_menu = (RecyclerView) findViewById(R.id.recycler_view);
         recycler_menu.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recycler_menu.setLayoutManager(layoutManager);
-
         loadMenu();
 
     }

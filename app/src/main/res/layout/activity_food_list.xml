@@ -14,8 +14,7 @@
         android:id="@+id/search_bar"
         android:layout_alignParentTop="true"
         app:mt_speechMode="false"
-        app:mt_hint="Enter your food"
-        >
+        app:mt_hint="Enter your food">
 
     </com.mancj.materialsearchbar.MaterialSearchBar>
     <android.support.v7.widget.RecyclerView

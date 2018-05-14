@@ -1,4 +1,4 @@
-package com.foodpark.filterFragments;
+package com.foodpark.Home.BottomNavigation.fragProfile;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,25 +9,18 @@ import android.view.ViewGroup;
 
 import com.foodpark.R;
 
-
 /**
- * Created by dennis on 23/4/18.
+ * Created by dennis on 10/5/18.
  */
 
-public class SwaraFragment extends Fragment {
-
-    public SwaraFragment() {
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+public class ProfileFragment extends Fragment {
+    public ProfileFragment() {
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.layout_swara, container, false);
+        View view = inflater.inflate(R.layout.layout_profile_fragment, container, false);
+        return view;
     }
 }

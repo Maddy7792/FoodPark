@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <Space
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/fp_tv_price"/>
+    <TextView
+        android:id="@+id/fp_tv_price"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/magettas_regular"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="@string/checked_filter"
+        android:textSize="20sp"
+        android:textColor="@color/colorCoffee"
+        android:background="@drawable/circular_background_line"/>
+
+</RelativeLayout>

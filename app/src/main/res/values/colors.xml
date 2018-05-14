@@ -3,7 +3,6 @@
     <color name="colorPrimary">#39796b</color>
     <color name="colorPrimaryDark">#32B635</color>
     <color name="colorAccent">#FF4081</color>
-
     <color name="btnSignup">#39796b</color>
     <color name="btnSignupActive">#A9d440</color>
     <color name="overlayBackground">#7f333639</color>
@@ -12,5 +11,6 @@
     <color name="screenBackground">#F5F5F5</color>
     <color name="colorCoffee">#3E2723</color>
     <color name="colorTextLabel">#BDBDBD</color>
-
+    <color name="colorTrans">#00000000</color>
+    <color name="colorImageBackground">#5D000000</color>
 </resources>

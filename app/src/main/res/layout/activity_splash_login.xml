@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/food"
-    tools:context="com.foodpark.splashScreen.SplashLoginActivity">
+    tools:context="com.foodpark.SelectAuth.SplashLoginActivity">
 
 
     <Button

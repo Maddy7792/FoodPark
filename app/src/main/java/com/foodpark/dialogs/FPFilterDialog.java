@@ -1,5 +1,6 @@
 package com.foodpark.dialogs;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -10,33 +11,36 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.foodpark.Interfaces.OnItemClickListener;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.Utils.Utils;
-import com.foodpark.filterFragments.GangaFragment;
-import com.foodpark.filterFragments.RaagaFragment;
-import com.foodpark.filterFragments.SwaraFragment;
+import com.foodpark.customviews.CustomViewPager;
+import com.foodpark.FilterFrags.diet.DietaryFragment;
+import com.foodpark.FilterFrags.price.PriceFragment;
+import com.foodpark.FilterFrags.sort.SortFragment;
 
 /**
  * Created by dennis on 7/5/18.
  */
 
-public class FPFilterDialog extends DialogFragment implements View.OnClickListener {
+public class FPFilterDialog extends DialogFragment implements View.OnClickListener ,OnItemClickListener{
 
     private FragmentManager fragmentManager;
     private Context context;
     private Dialog dialog;
     private TabLayout tabs;
     private ImageView fpCancel;
-    private ViewPager viewPager;
-
+    private CustomViewPager viewPager;
+    private Button fpBtnFinished;
     public FPFilterDialog() {
     }
 
@@ -58,6 +62,7 @@ public class FPFilterDialog extends DialogFragment implements View.OnClickListen
 
     }
 
+    @SuppressLint("ResourceType")
     @Override
     public void onStart() {
         super.onStart();
@@ -65,12 +70,12 @@ public class FPFilterDialog extends DialogFragment implements View.OnClickListen
         dialog = getDialog();
         if (dialog != null) {
             int width = ViewGroup.LayoutParams.MATCH_PARENT;
-            int height = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = ViewGroup.LayoutParams.WRAP_CONTENT;
             int screenHeight = Utils.deviceDimensions(getActivity(), 100, AppConstants.WIDTH);
             dialog.getWindow().setLayout(width, height);
             dialog.setCanceledOnTouchOutside(true);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(ContextCompat
-                    .getColor(getActivity(), R.color.screenBackground)));
+                    .getColor(getActivity(), R.color.colorTrans)));
             getDialog().getWindow().setGravity(Gravity.TOP);
         }
     }
@@ -81,7 +86,8 @@ public class FPFilterDialog extends DialogFragment implements View.OnClickListen
         View view = inflater.inflate(R.layout.filter_dialog_layout, container);
         fpCancel = view.findViewById(R.id.fp_cancel);
         tabs = view.findViewById(R.id.fp_tabs);
-        viewPager = (ViewPager) view.findViewById(R.id.fp_viewpager);
+        fpBtnFinished = view.findViewById(R.id.fp_btn_finished);
+        viewPager = (CustomViewPager) view.findViewById(R.id.fp_viewpager);
         tabs.addTab(tabs.newTab());
         tabs.addTab(tabs.newTab());
         tabs.addTab(tabs.newTab());
@@ -98,6 +104,7 @@ public class FPFilterDialog extends DialogFragment implements View.OnClickListen
         }
 
         fpCancel.setOnClickListener(this);
+        fpBtnFinished.setOnClickListener(this);
         return view;
     }
 
@@ -108,6 +115,15 @@ public class FPFilterDialog extends DialogFragment implements View.OnClickListen
         if (Id == R.id.fp_cancel) {
             getDialog().dismiss();
         }
+
+        if (Id == R.id.fp_btn_finished){
+            dismiss();
+        }
+    }
+
+    @Override
+    public void OnClick(View view, int Position, boolean isLongClick) {
+        Toast.makeText(context, "Position"+Position, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -123,14 +139,14 @@ public class FPFilterDialog extends DialogFragment implements View.OnClickListen
         public android.support.v4.app.Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    SwaraFragment swara = new SwaraFragment();
-                    return swara;
+                    SortFragment sort = new SortFragment();
+                    return sort;
                 case 1:
-                    RaagaFragment raaga = new RaagaFragment();
-                    return raaga;
+                    PriceFragment price = new PriceFragment();
+                    return price;
                 case 2:
-                    GangaFragment tab3 = new GangaFragment();
-                    return tab3;
+                    DietaryFragment die = new DietaryFragment();
+                    return die;
                 default:
                     return null;
             }

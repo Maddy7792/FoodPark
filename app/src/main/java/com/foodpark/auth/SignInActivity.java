@@ -17,7 +17,7 @@ import android.support.v7.widget.Toolbar;
 import com.foodpark.Common.Common;
 import com.foodpark.R;
 import com.foodpark.Utils.Validation;
-import com.foodpark.activities.NavigationActivity;
+import com.foodpark.Home.HomeActivity;
 import com.foodpark.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -123,7 +123,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     user.setPhone(etPhoneNumber.getText().toString());
                     if (user.getPassword().equals(etPassword.getText().toString()) && !etPassword.getText().toString().isEmpty()) {
                         //Toast.makeText(SignInActivity.this, "Signin Successfully", Toast.LENGTH_SHORT).show();
-                        Intent navigationIntent = new Intent(SignInActivity.this, NavigationActivity.class);
+                        Intent navigationIntent = new Intent(SignInActivity.this, HomeActivity.class);
                         Common.currentUser = user;
                         startActivity(navigationIntent);
                         finish();

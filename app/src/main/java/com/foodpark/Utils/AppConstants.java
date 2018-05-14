@@ -19,6 +19,8 @@ public class AppConstants {
     public static final String KEY_NO = "No";
     public static final String KEY_MENU_ID = "menuId";
     public static final String KEY_NAME = "Name";
+    public static final String KEY_TOP_CATEGORIES = "TopCategories";
+    public static final String KEY_MORE_CATEGORIES = "MoreCategories";
 
     public static final String VALID_EMAIL = "Enter Valid Email Address";
     public static final String VALID_FIRST_NAME = "Enter Valid First Name";
@@ -27,4 +29,12 @@ public class AppConstants {
     public static final String VALID_PASSWORD = "Enter Valid Password";
 
     public static final String WIDTH = "width";
+    public static final String HOME = "Home";
+    public static final String SEARCH = "Search";
+    public static final String ORDERS = "Orders";
+    public static final String PROFILE = "Profile";
+    public static final String FRAGMENT_OTHER = "OTHER";
+
+
+    public static final String PROGRESS_TEXT = "Loading....";
 }

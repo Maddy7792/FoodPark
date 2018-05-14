@@ -1,8 +1,7 @@
-package com.foodpark.filterFragments;
+package com.foodpark.Home.BottomNavigation.fragOrder;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,24 +9,19 @@ import android.view.ViewGroup;
 
 import com.foodpark.R;
 
-
 /**
- * Created by dennis on 23/4/18.
+ * Created by dennis on 10/5/18.
  */
 
-public class RaagaFragment extends Fragment {
-    public RaagaFragment() {
-    }
+public class OrdersFragment extends Fragment {
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public OrdersFragment() {
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.layout_raaga, container, false);
+        View view = inflater.inflate(R.layout.layout_order_fragment, container, false);
+        return view;
     }
 }
