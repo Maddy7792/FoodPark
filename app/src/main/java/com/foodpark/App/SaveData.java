@@ -9,7 +9,8 @@ import android.app.Application;
 public class SaveData extends Application {
 
     private static SaveData mInstance;
-
+    public static boolean IS_DEBUG = true;
+    private String searchQuery;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -18,5 +19,13 @@ public class SaveData extends Application {
 
     public static synchronized SaveData getInstance(){
         return mInstance;
+    }
+
+    public String getSearchQuery() {
+        return searchQuery;
+    }
+
+    public void setSearchQuery(String searchQuery) {
+        this.searchQuery = searchQuery;
     }
 }

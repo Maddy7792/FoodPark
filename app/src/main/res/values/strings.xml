@@ -2,10 +2,8 @@
     <string name="app_name">FoodPark</string>
     <string name="txtslogan">Deliciousness jumping into the mouth</string>
     <string name="title_activity_navigation">NavigationActivity</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
     <string name="app_exit_text">Are you sure you want to exit?</string>
     <string name="hint_serach_bar">Enter your Food</string>
@@ -27,7 +25,24 @@
     <string name="filter_reset">RESET</string>
     <string name="checked_filter">Filter</string>
     <string name="filter_finished">Finished</string>
-
+    <string name="single">\u20B9</string>
+    <string name="doublerupess">\u20B9\u20B9</string>
+    <string name="triple">\u20B9\u20B9\u20B9</string>
+    <string name="four">\u20B9\u20B9\u20B9\u20B9</string>
+    <string name="categories_title">title</string>
+    <string name="top_categories">Top Categories</string>
+    <string name="more_categories">More Categories</string>
+    <string name="search_hint">Search for a restaurant or dish</string>
+    <string name="your_favourites">Your Favourites</string>
+    <string name="payment">Payment</string>
+    <string name="help">Help</string>
+    <string name="free_food">Free Food</string>
+    <string name="promotions">Promotions</string>
+    <string name="settings">Settings</string>
+    <string name="account">Account</string>
+    <string name="edit">EDIT</string>
+    <string name="account_information">Account Information</string>
+    <string name="saved_places">saved Places</string>
 
     <string-array name="countryCodes">
         <item>93,AF</item>
@@ -239,12 +254,6 @@
     </string-array>
 
 
-    <string name="single">\u20B9</string>
-    <string name="doublerupess">\u20B9\u20B9</string>
-    <string name="triple">\u20B9\u20B9\u20B9</string>
-    <string name="four">\u20B9\u20B9\u20B9\u20B9</string>
-    <string name="categories_title">title</string>
-    <string name="top_categories">Top Categories</string>
-    <string name="more_categories">More Categories</string>
+
 
 </resources>

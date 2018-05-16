@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Build;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
@@ -11,6 +13,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -100,8 +103,23 @@ public class Utils {
         progressDialog.setMessage(AppConstants.PROGRESS_TEXT);
         progressDialog.setCanceledOnTouchOutside(false);
         return progressDialog;
-
-
     }
+
+    public static int dpToPx(int dp, Activity activity) {
+        Resources r = activity.getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+    public static void setNormalIntent(Activity source, Class<?> destination) {
+        Intent intent = new Intent(source, destination);
+        source.startActivity(intent);
+    }
+
+    public static void setDataIntent(Activity source, Class<?> destination, String type) {
+        Intent intent = new Intent(source, destination);
+        intent.putExtra(AppConstants.KEY_TYPE, type);
+        source.startActivity(intent);
+    }
+
 
 }

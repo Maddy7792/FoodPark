@@ -19,15 +19,34 @@
             android:background="@android:color/white"
             android:theme="@style/SearchViewStyle">
 
-            <TextView
-                android:id="@+id/fp_tv_home_toolbar_name"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/fp_tv_home_toolbar_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/fp_filter"
+                    android:layout_toStartOf="@+id/fp_filter"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/filter"
+                    android:padding="10dp"
+                    android:id="@+id/fp_filter" />
+            </RelativeLayout>
+
+
+
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
@@ -52,5 +71,7 @@
         android:background="@android:color/white"
         android:isScrollContainer="false"
         app:itemIconTint="@android:color/black"
-        app:menu="@menu/menu_bottom_navigation" />
+        app:menu="@menu/menu_bottom_navigation"
+        app:elevation="5dp"
+        android:elevation="5dp" />
 </android.support.design.widget.CoordinatorLayout>

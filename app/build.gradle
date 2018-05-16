@@ -10,18 +10,20 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
     }
 }
 allprojects {
     repositories {
 
         maven { url "https://jitpack.io" }
-        maven { url "https://maven.google.com"}
+        maven { url "https://maven.google.com" }
     }
 }
 dependencies {
@@ -43,7 +45,6 @@ dependencies {
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
     compile 'com.github.mancj:MaterialSearchBar:0.7.6'
-
 
 
 }

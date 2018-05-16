@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.foodpark.R;
@@ -38,12 +39,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private ActionBar actionBar;
     private TextView fpTVToolbarName;
     private CoordinatorLayout.LayoutParams layoutParams;
+    private ImageView fpIVFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         toolbar = findViewById(R.id.fp_home_toolbar);
+        fpIVFilter = toolbar.findViewById(R.id.fp_filter);
         fpTVToolbarName = toolbar.findViewById(R.id.fp_tv_home_toolbar_name);
         fpBottomNavigationView = findViewById(R.id.fp_bottomnavigation);
         setSupportActionBar(toolbar);
@@ -54,10 +57,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         fragmentManager = getSupportFragmentManager();
         fpBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigation);
         Utils.disableShiftMode(fpBottomNavigationView);
-        layoutParams = (CoordinatorLayout.LayoutParams)fpBottomNavigationView.getLayoutParams();
+        fpIVFilter.setOnClickListener(this);
+        layoutParams = (CoordinatorLayout.LayoutParams) fpBottomNavigationView.getLayoutParams();
         layoutParams.setBehavior(new BottomNavigationViewBehaviour());
         fpTVToolbarName.setText(AppConstants.HOME);
-        loadFragment(new HomeFragment(),AppConstants.HOME);
+        loadFragment(new HomeFragment(), AppConstants.HOME);
 
     }
 
@@ -66,23 +70,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         int Id = view.getId();
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.filter_item, menu);
-        MenuItem filter = menu.findItem(R.id.fp_filter);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int Id = item.getItemId();
         if (Id == R.id.fp_filter) {
             filterDialog = new FPFilterDialog();
             filterDialog.show(fragmentManager, "filter");
         }
-        return super.onOptionsItemSelected(item);
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigation =
@@ -94,23 +86,27 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     switch (item.getItemId()) {
                         case R.id.fp_bn_home:
                             fpTVToolbarName.setText(AppConstants.HOME);
+                            showViews();
                             fragment = new HomeFragment();
-                            loadFragment(fragment,AppConstants.HOME);
+                            loadFragment(fragment, AppConstants.HOME);
                             return true;
                         case R.id.fp_bn_search:
                             fpTVToolbarName.setText(AppConstants.SEARCH);
+                            hideViews();
                             fragment = new SearchFragment();
-                            loadFragment(fragment,AppConstants.FRAGMENT_OTHER);
+                            loadFragment(fragment, AppConstants.FRAGMENT_OTHER);
                             return true;
                         case R.id.fp_bn_orders:
                             fpTVToolbarName.setText(AppConstants.ORDERS);
+                            hideViews();
                             fragment = new OrdersFragment();
-                            loadFragment(fragment,AppConstants.FRAGMENT_OTHER);
+                            loadFragment(fragment, AppConstants.FRAGMENT_OTHER);
                             return true;
                         case R.id.fp_bn_profile:
                             fpTVToolbarName.setText(AppConstants.PROFILE);
+                            hideViews();
                             fragment = new ProfileFragment();
-                            loadFragment(fragment,AppConstants.FRAGMENT_OTHER);
+                            loadFragment(fragment, AppConstants.FRAGMENT_OTHER);
                             return true;
                     }
                     return false;
@@ -118,23 +114,26 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             };
 
 
-    private void loadFragment(Fragment fragment,String TAG) {
+    private void loadFragment(Fragment fragment, String TAG) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fp_home, fragment);
         final int count = fragmentManager.getBackStackEntryCount();
-        if (TAG.equals(AppConstants.FRAGMENT_OTHER)){
+        if (TAG.equals(AppConstants.FRAGMENT_OTHER)) {
             transaction.addToBackStack(TAG);
         }
         transaction.commit();
         fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
             public void onBackStackChanged() {
-                if( fragmentManager.getBackStackEntryCount() <= count){
+                if (fragmentManager.getBackStackEntryCount() <= count) {
                     // pop all the fragment and remove the listener
                     fragmentManager.popBackStack(AppConstants.FRAGMENT_OTHER, POP_BACK_STACK_INCLUSIVE);
                     fragmentManager.removeOnBackStackChangedListener(this);
                     // set the home button selected
+                    fpTVToolbarName.setText(AppConstants.HOME);
+                    showViews();
                     fpBottomNavigationView.getMenu().getItem(0).setChecked(true);
+
                 }
             }
         });
@@ -149,5 +148,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             getSupportFragmentManager().popBackStack();
         }
     }*/
+
+    private void hideViews() {
+        fpIVFilter.setVisibility(View.GONE);
+    }
+
+    private void showViews() {
+        fpIVFilter.setVisibility(View.VISIBLE);
+    }
 
 }

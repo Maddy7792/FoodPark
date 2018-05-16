@@ -1,48 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:id="@+id/fp_ll_top"
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/fp_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        app:cardElevation="0dp">
 
-        <TextView
-            android:id="@+id/fp_tv_top_categories"
+        <android.support.v7.widget.SearchView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/verdana"
-            android:padding="10dp"
-            android:text="@string/top_categories"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:textStyle="normal" />
+            android:id="@+id/fp_categories_search"
+            android:inputType="textAutoComplete|textAutoCorrect"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/searchs"
+                android:layout_centerVertical="true"
+                android:id="@+id/fp_iv_search_icon"
+                android:padding="10dp" />
+            <EditText
+                android:id="@+id/fp_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/search_hint"
+                android:padding="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_toRightOf="@+id/fp_iv_search_icon"
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/fp_rv_top_categories"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="true"
-            android:fitsSystemWindows="true"/>
-        <TextView
-            android:id="@+id/fp_tv_more_categories"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/verdana"
-            android:padding="10dp"
-            android:text="@string/more_categories"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:textStyle="normal" />
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/fp_rv_more_categories"
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/fp_card"
+        >
+
+        <RelativeLayout
+            android:id="@+id/fp_ll_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clipToPadding="true"
-            android:fitsSystemWindows="true"/>
-    </LinearLayout>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/fp_tv_top_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/verdana"
+                android:padding="10dp"
+                android:text="@string/top_categories"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/fp_rv_top_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fp_tv_top_categories"
+                android:clipToPadding="true"
+                android:fitsSystemWindows="true" />
+
+            <TextView
+                android:id="@+id/fp_tv_more_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fp_rv_top_categories"
+                android:fontFamily="@font/verdana"
+                android:padding="10dp"
+                android:text="@string/more_categories"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/fp_rv_more_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fp_tv_more_categories"
+                android:clipToPadding="true"
+                android:fitsSystemWindows="true" />
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+
 
 </RelativeLayout>
