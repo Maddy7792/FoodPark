@@ -17,11 +17,6 @@
         <activity
             android:name=".Home.HomeActivity"
             android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".auth.SignInActivity" />
         <activity android:name=".auth.SignUpActivity" />
@@ -33,11 +28,18 @@
         <activity android:name=".activities.FoodDetailsActivity" />
         <activity android:name=".activities.CartActivity" />
         <activity android:name=".activities.OrderStatusActivity" />
-        <activity android:name=".SelectAuth.SplashLoginActivity" />
+        <activity android:name=".SelectAuth.SplashLoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".profile.FPFavouriteActivity" />
         <activity android:name=".profile.FPPaymentActivity" />
         <activity android:name=".profile.FPSettingsActivity" />
-        <activity android:name=".profile.FPOtherSettingsActivity"></activity>
+        <activity android:name=".profile.FPOtherSettingsActivity" />
+        <activity android:name=".profile.FPProfileEditActivity"></activity>
     </application>
 
 </manifest>

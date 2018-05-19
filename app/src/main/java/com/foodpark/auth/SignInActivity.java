@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
+import com.foodpark.App.SaveData;
 import com.foodpark.Common.Common;
 import com.foodpark.R;
 import com.foodpark.Utils.Validation;
@@ -117,14 +119,16 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         table_user.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                SaveData.getInstance().setPhoneNumber(etPhoneNumber.getText().toString());
                 if (dataSnapshot.child(etPhoneNumber.getText().toString()).exists() && !etPhoneNumber.getText().toString().isEmpty()) {
                     mDialog.dismiss();
                     User user = dataSnapshot.child(etPhoneNumber.getText().toString()).getValue(User.class);
-                    user.setPhone(etPhoneNumber.getText().toString());
                     if (user.getPassword().equals(etPassword.getText().toString()) && !etPassword.getText().toString().isEmpty()) {
-                        //Toast.makeText(SignInActivity.this, "Signin Successfully", Toast.LENGTH_SHORT).show();
                         Intent navigationIntent = new Intent(SignInActivity.this, HomeActivity.class);
                         Common.currentUser = user;
+                        user.setPhone(etPhoneNumber.getText().toString());
+                        Log.d("PhoneNumber",""+user.getPhone());
+                        SaveData.getInstance().setUser(user);
                         startActivity(navigationIntent);
                         finish();
                     } else {

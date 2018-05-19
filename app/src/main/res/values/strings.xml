@@ -11,7 +11,7 @@
     <string name="register">Register</string>
     <string name="login_text">log in with your Account</string>
     <string name="phone_number">Phone Number</string>
-    <string name="password">Password</string>
+    <string name="hint_profile_password">Password</string>
     <string name="_12345">12345</string>
     <string name="sign_in">Sign In</string>
     <string name="forget_password">Forget Password?</string>
@@ -43,6 +43,21 @@
     <string name="edit">EDIT</string>
     <string name="account_information">Account Information</string>
     <string name="saved_places">saved Places</string>
+    <string name="address_home">Home</string>
+    <string name="address_work">Work</string>
+    <string name="add_home">Add home</string>
+    <string name="add_work">Add work</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="first_name">FIRST NAME</string>
+    <string name="surname">SURNAME</string>
+    <string name="email">EMAIL</string>
+    <string name="hi_phone_number">PHONE NUMBER</string>
+    <string name="edit_account">Edit account</string>
+    <string name="profile_first_name">First name</string>
+    <string name="password">Password</string>
+    <string name="profile_phone_number">Phone number</string>
+    <string name="email_address">Email address</string>
+    <string name="profile_surname">Surname</string>
 
     <string-array name="countryCodes">
         <item>93,AF</item>
@@ -252,8 +267,6 @@
         <item>260,ZM</item>
         <item>263,ZW</item>
     </string-array>
-
-
 
 
 </resources>

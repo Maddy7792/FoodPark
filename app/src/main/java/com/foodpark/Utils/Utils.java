@@ -14,10 +14,14 @@ import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import com.foodpark.R;
+import com.foodpark.activities.NavigationActivity;
+import com.foodpark.auth.SignInActivity;
 
 import java.lang.reflect.Field;
 
@@ -121,5 +125,19 @@ public class Utils {
         source.startActivity(intent);
     }
 
+    public static void hideKeyboard(Activity context) {
+        View view = context.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        }
+    }
 
+    public static void signOut(Activity source, Class<?> destination) {
+        Intent intent = new Intent(source, SignInActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        source.startActivity(intent);
+    }
 }

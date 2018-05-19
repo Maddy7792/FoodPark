@@ -10,12 +10,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.foodpark.App.SaveData;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.Utils.Utils;
@@ -62,7 +64,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         layoutParams.setBehavior(new BottomNavigationViewBehaviour());
         fpTVToolbarName.setText(AppConstants.HOME);
         loadFragment(new HomeFragment(), AppConstants.HOME);
-
     }
 
 
