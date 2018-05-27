@@ -60,6 +60,9 @@
     <string name="profile_surname">Surname</string>
     <string name="update">Update</string>
     <string name="remember_me">Remember me</string>
+    <string name="forget_your_pasword">Forget Your Pasword?</string>
+    <string name="message_forget">Enter your Phone Number and we\'ll send you a message to Mobile Number (Charges may apply)</string>
+    <string name="reset">Reset</string>
 
     <string-array name="countryCodes">
         <item>93,AF</item>

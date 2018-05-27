@@ -89,7 +89,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child(etPhoneNumber.getText().toString()).exists()) {
                     mDailog.dismiss();
-                    Toast.makeText(SignUpActivity.this, "Phone Number already registered", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this,
+                            "Phone Number already registered", Toast.LENGTH_SHORT).show();
                 } else {
                     mDailog.dismiss();
                     User user = new User(etName.getText().toString(),
@@ -97,7 +98,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             etSurName.getText().toString(),
                             etEmail.getText().toString(),etPhoneNumber.getText().toString());
                     table_user.child(etPhoneNumber.getText().toString()).setValue(user);
-                    Toast.makeText(SignUpActivity.this, "SignUp Successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "SignUp Successfully",
+                            Toast.LENGTH_SHORT).show();
                     finish();
                 }
 

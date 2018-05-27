@@ -133,10 +133,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 SaveData.getInstance().setPhoneNumber(etPhoneNumber.getText().toString());
-                if (dataSnapshot.child(etPhoneNumber.getText().toString()).exists() && !etPhoneNumber.getText().toString().isEmpty()) {
+                if (dataSnapshot.child(etPhoneNumber.getText().toString()).exists() &&
+                        !etPhoneNumber.getText().toString().isEmpty()) {
                     mDialog.dismiss();
                     User user = dataSnapshot.child(etPhoneNumber.getText().toString()).getValue(User.class);
-                    if (user.getPassword().equals(etPassword.getText().toString()) && !etPassword.getText().toString().isEmpty()) {
+                    if (user.getPassword().equals(etPassword.getText().toString()) &&
+                            !etPassword.getText().toString().isEmpty()) {
                         //Remember Me for saving phoneNumber and passwords
                         if (rememberMe.isChecked()){
                             Paper.book().write(AppConstants.KEY_PAPER_USER,etPhoneNumber.getText().toString());
@@ -154,11 +156,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         table_user.removeEventListener(this);
                         finish();
                     } else {
-                        Toast.makeText(SignInActivity.this, "Sign In failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignInActivity.this,
+                                "Sign In failed", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     mDialog.dismiss();
-                    Toast.makeText(SignInActivity.this, "User not exist in Database", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignInActivity.this,
+                            "User not exist in Database", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -174,7 +178,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         int Id = v.getId();
 
         if (Id == R.id.fp_forget_password) {
-            Toast.makeText(this, "Forget Password", Toast.LENGTH_SHORT).show();
+            Utils.setNormalIntent(this,FPForgetPasswordActivity.class);
         }
 
         if (Id == R.id.fp_tv_register) {
