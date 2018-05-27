@@ -53,12 +53,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/verdana"
             android:gravity="center"
             android:padding="30dp"
             android:text="@string/login_text"
             android:textAllCaps="true"
-            android:textColor="@android:color/black"
-            android:fontFamily="@font/verdana"/>
+            android:textColor="@android:color/black" />
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -80,9 +80,9 @@
                     android:inputType="phone"
                     android:padding="15dp"
                     android:textColor="@android:color/black"
+                    android:textCursorDrawable="@color/colorCoffee"
                     android:textSize="20sp"
-                    android:cursorVisible="false"
-                    android:textCursorDrawable="@color/colorCoffee"/>
+                    android:theme="@style/TextLabel" />
 
                 <View
                     android:layout_width="match_parent"
@@ -94,16 +94,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/transparent"
+                    android:cursorVisible="false"
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:padding="15dp"
                     android:textColor="@android:color/black"
-                    android:textSize="20sp"
-                    android:cursorVisible="false"
-                    android:textCursorDrawable="@color/colorCoffee"/>
+                    android:textCursorDrawable="@color/colorCoffee"
+                    android:textSize="20sp" />
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
+
+        <CheckBox
+            android:id="@+id/fp_remember_me"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/magettas_regular"
+            android:padding="10dp"
+            android:text="@string/remember_me"
+            android:textColor="@color/colorGreen"
+            android:textStyle="normal"
+            android:theme="@style/MyCheckBox"
+            android:textSize="15sp"/>
 
         <Button
             android:id="@+id/btn_signin_activity"
@@ -111,7 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:background="@color/colorGreen"
             android:fontFamily="@font/verdana"
             android:shadowColor="@android:color/black"
@@ -123,13 +137,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/magettas_regular"
             android:gravity="center"
             android:padding="20dp"
             android:text="@string/forget_password"
             android:textColor="@color/colorGreen"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/magettas_regular"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
 
@@ -140,14 +154,13 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/rectangular_background_line"
+        android:fontFamily="@font/magettas_regular"
         android:gravity="center"
         android:padding="10sp"
         android:text="@string/login_register"
         android:textAllCaps="true"
         android:textColor="@color/colorCoffee"
-        android:textSize="15sp"
-        android:fontFamily="@font/magettas_regular"
-        android:background="@drawable/rectangular_background_line"
-        />
+        android:textSize="15sp" />
 
 </RelativeLayout>

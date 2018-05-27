@@ -25,6 +25,13 @@ public class AppConstants {
     public static final String KEY_TOP = "TOP";
     public static final String KEY_MORE = "MORE";
     public static final String KEY_TYPE = "type";
+    public static final String KEY_FIRST_NAME = "FirstName";
+    public static final String KEY_EMAIL = "Email";
+    public static final String KEY_SURNAME = "Surname";
+    public static final String KEY_PASSWORD = "Password";
+    public static final String KEY_PHONE_NUMBER = "PhoneNumber";
+
+    public static final String KEY_DATA = "Data";
 
     public static final String VALID_EMAIL = "Enter Valid Email Address";
     public static final String VALID_FIRST_NAME = "Enter Valid First Name";
@@ -45,4 +52,13 @@ public class AppConstants {
 
 
     public static final String PROGRESS_TEXT = "Loading....";
+    public static final String UPLOADING_TEXT = "Uploadig....";
+    public static final int PICK_GALLERY_IMAGE = 1;
+
+    public static final String PROFILE_AVATAR= "Profile";
+    //Paper Keys
+    public static final String KEY_PAPER_PASSWORD = "Password";
+    public static final String KEY_PAPER_USER = "User";
+
+
 }

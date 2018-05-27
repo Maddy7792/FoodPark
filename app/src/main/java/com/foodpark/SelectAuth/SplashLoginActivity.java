@@ -19,7 +19,6 @@ public class SplashLoginActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_login);
-
         fpBtnLogin = findViewById(R.id.fp_btn_login);
         fpBtnRegister = findViewById(R.id.fp_btn_register);
         fpBtnLogin.setOnClickListener(this);

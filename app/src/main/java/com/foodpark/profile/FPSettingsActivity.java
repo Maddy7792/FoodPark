@@ -1,5 +1,6 @@
 package com.foodpark.profile;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -11,9 +12,25 @@ import android.widget.TextView;
 
 import com.foodpark.App.SaveData;
 import com.foodpark.R;
+import com.foodpark.Utils.AppConstants;
 import com.foodpark.Utils.Utils;
 import com.foodpark.auth.SignInActivity;
 import com.foodpark.model.User;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.AutocompleteFilter;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import io.paperdb.Paper;
 
 public class FPSettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,11 +44,22 @@ public class FPSettingsActivity extends AppCompatActivity implements View.OnClic
     private TextView fpSignOut;
     private TextView fpHomeAddress;
     private TextView fpWorkAddress;
+    private FirebaseDatabase database;
+    private DatabaseReference userReference;
+    private PlaceAutocompleteFragment placeAutocompleteFragment;
+    private Place address;
+    private final static int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
+    private Place place;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fp_settings);
+        Paper.init(this);
+        database = FirebaseDatabase.getInstance();
+        if (userReference != null) {
+            userReference = database.getReference(AppConstants.KEY_USER);
+        }
         Utils.hideKeyboard(this);
         fpToolBar = findViewById(R.id.fp_settings_toolbar);
         fpIVBack = fpToolBar.findViewById(R.id.fp_iv_tb_settings_back);
@@ -46,7 +74,6 @@ public class FPSettingsActivity extends AppCompatActivity implements View.OnClic
         fpSignOut = findViewById(R.id.fp_tv_signout);
         fpWorkAddress = findViewById(R.id.fp_tv_address_work);
         fpHomeAddress = findViewById(R.id.fp_tv_address_home);
-
         if (SaveData.getInstance().getUser() != null) {
             User user = SaveData.getInstance().getUser();
             etName.setText(user.getName());
@@ -61,7 +88,11 @@ public class FPSettingsActivity extends AppCompatActivity implements View.OnClic
         fpIVBack.setOnClickListener(this);
         fpTVEdit.setOnClickListener(this);
         fpSignOut.setOnClickListener(this);
+        fpHomeAddress.setOnClickListener(this);
+        fpWorkAddress.setOnClickListener(this);
+       // getUser();
     }
+
 
     @Override
     public void onClick(View v) {
@@ -76,7 +107,95 @@ public class FPSettingsActivity extends AppCompatActivity implements View.OnClic
         }
 
         if (Id == R.id.fp_tv_signout) {
+            Paper.book().delete(AppConstants.KEY_PAPER_USER);
+            Paper.book().delete(AppConstants.KEY_PAPER_PASSWORD);
             Utils.signOut(this, SignInActivity.class);
         }
+
+        if (Id == R.id.fp_tv_address_home) {
+            callPlaces();
+        }
+
+        if (Id == R.id.fp_tv_address_work){
+
+        }
     }
+
+    private void callPlaces() {
+        try {
+            AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
+                    .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS)
+                    .build();
+            Intent intent =
+                    new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                            .setFilter(typeFilter)
+                            .build(this);
+
+
+            startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+        } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE && data!=null) {
+            if (resultCode == RESULT_OK) {
+                place = PlaceAutocomplete.getPlace(this, data);
+                fpHomeAddress.setText(place.getAddress());
+                if (place!=null){
+                    addPlace(place);
+                }
+
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+                Log.i("STATUS", status.getStatusMessage());
+            } else if (resultCode == RESULT_CANCELED) {
+
+            }
+        }
+    }
+
+    private void addPlace(final Place place) {
+Log.d("Phone",""+SaveData.getInstance().getUser().getPhone());
+        userReference.child(SaveData.getInstance().getUser().getPhone()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot!=null){
+                    User user = new User();
+                    user.setHomeAddress((place.getAddress().toString()));
+                    userReference.setValue(user);
+                }
+
+
+                userReference.removeEventListener(this);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void getUser() {
+        userReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                SaveData.getInstance().setUser(user);
+                userReference.removeEventListener(this);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
 }

@@ -6,6 +6,7 @@ package com.foodpark.model;
 
 public class Category {
 
+    private String Id;
     private String Name;
     private String Image;
 
@@ -31,5 +32,13 @@ public class Category {
 
     public void setImage(String image) {
         Image = image;
+    }
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
     }
 }

@@ -95,11 +95,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     User user = new User(etName.getText().toString(),
                             etPassword.getText().toString(),
                             etSurName.getText().toString(),
-                            etEmail.getText().toString());
+                            etEmail.getText().toString(),etPhoneNumber.getText().toString());
                     table_user.child(etPhoneNumber.getText().toString()).setValue(user);
                     Toast.makeText(SignUpActivity.this, "SignUp Successfully", Toast.LENGTH_SHORT).show();
                     finish();
                 }
+
+                table_user.removeEventListener(this);
 
             }
 

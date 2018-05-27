@@ -22,6 +22,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.foodpark.R;
 import com.foodpark.activities.NavigationActivity;
 import com.foodpark.auth.SignInActivity;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.lang.reflect.Field;
 
@@ -140,4 +141,5 @@ public class Utils {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         source.startActivity(intent);
     }
+
 }

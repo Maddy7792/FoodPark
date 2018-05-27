@@ -1,7 +1,9 @@
 package com.foodpark.auth;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -9,6 +11,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +21,8 @@ import android.support.v7.widget.Toolbar;
 import com.foodpark.App.SaveData;
 import com.foodpark.Common.Common;
 import com.foodpark.R;
+import com.foodpark.Utils.AppConstants;
+import com.foodpark.Utils.Utils;
 import com.foodpark.Utils.Validation;
 import com.foodpark.Home.HomeActivity;
 import com.foodpark.model.User;
@@ -26,6 +31,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import io.paperdb.Paper;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,11 +46,16 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private TextView fpTVRegister;
     private DatabaseReference table_user;
     private FirebaseDatabase database;
+    private Context context;
+    private CheckBox rememberMe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+        context = this;
+        Paper.init(context);
+        rememberMe = findViewById(R.id.fp_remember_me);
         etPhoneNumber = (EditText) findViewById(R.id.et_phone_number);
         etPassword = (EditText) findViewById(R.id.et_password);
         btnSignIn = (Button) findViewById(R.id.btn_signin_activity);
@@ -106,6 +118,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
                 if (isValid()) {
                     setupAccount();
+                    Utils.hideKeyboard(SignInActivity.this);
                 }
 
             }
@@ -124,12 +137,21 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     mDialog.dismiss();
                     User user = dataSnapshot.child(etPhoneNumber.getText().toString()).getValue(User.class);
                     if (user.getPassword().equals(etPassword.getText().toString()) && !etPassword.getText().toString().isEmpty()) {
+                        //Remember Me for saving phoneNumber and passwords
+                        if (rememberMe.isChecked()){
+                            Paper.book().write(AppConstants.KEY_PAPER_USER,etPhoneNumber.getText().toString());
+                            Paper.book().write(AppConstants.KEY_PAPER_PASSWORD,etPassword.getText().toString());
+                        }else {
+                            Paper.book().delete(AppConstants.KEY_PAPER_USER);
+                            Paper.book().delete(AppConstants.KEY_PAPER_PASSWORD);
+                        }
                         Intent navigationIntent = new Intent(SignInActivity.this, HomeActivity.class);
                         Common.currentUser = user;
                         user.setPhone(etPhoneNumber.getText().toString());
-                        Log.d("PhoneNumber",""+user.getPhone());
+                        Log.d("PhoneNumber", "" + user.getPhone());
                         SaveData.getInstance().setUser(user);
                         startActivity(navigationIntent);
+                        table_user.removeEventListener(this);
                         finish();
                     } else {
                         Toast.makeText(SignInActivity.this, "Sign In failed", Toast.LENGTH_SHORT).show();

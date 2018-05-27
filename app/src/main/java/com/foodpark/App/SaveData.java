@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.foodpark.model.User;
 
+import io.paperdb.Paper;
+
 /**
  * Created by dennis on 10/5/18.
  */

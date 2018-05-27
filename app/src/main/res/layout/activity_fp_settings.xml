@@ -1,76 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context="com.foodpark.profile.FPSettingsActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/fp_app_bar_settings"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="8dp">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/fp_settings_toolbar"
+        android:orientation="vertical">
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/fp_app_bar_settings"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/white"
-            android:theme="@style/SearchViewStyle">
+            android:layout_height="wrap_content"
+            app:elevation="8dp">
 
-            <RelativeLayout
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/fp_settings_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/white"
+                android:theme="@style/SearchViewStyle">
 
-                <ImageView
-                    android:id="@+id/fp_iv_tb_settings_back"
-                    android:layout_width="25dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/back_arrow" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/fp_tv_setting_tool_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_toLeftOf="@+id/fp_tv_setting_edit"
-                    android:layout_toRightOf="@+id/fp_iv_tb_settings_back"
-                    android:fontFamily="@font/verdana"
-                    android:gravity="center"
-                    android:text="@string/account"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp" />
+                    <ImageView
+                        android:id="@+id/fp_iv_tb_settings_back"
+                        android:layout_width="25dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/back_arrow" />
 
-                <TextView
-                    android:id="@+id/fp_tv_setting_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginRight="10dp"
-                    android:fontFamily="@font/verdana"
-                    android:gravity="center"
-                    android:text="@string/edit"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/fp_tv_setting_tool_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_toLeftOf="@+id/fp_tv_setting_edit"
+                        android:layout_toRightOf="@+id/fp_iv_tb_settings_back"
+                        android:fontFamily="@font/verdana"
+                        android:gravity="center"
+                        android:text="@string/account"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
 
-        </android.support.v7.widget.Toolbar>
+                    <TextView
+                        android:id="@+id/fp_tv_setting_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/verdana"
+                        android:gravity="center"
+                        android:text="@string/edit"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
 
-    </android.support.design.widget.AppBarLayout>
+            </android.support.v7.widget.Toolbar>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/fp_app_bar_settings">
-
+        </android.support.design.widget.AppBarLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <android.support.v7.widget.CardView
                 android:id="@+id/fp_card_avatar"
@@ -135,7 +133,8 @@
                                 android:padding="15dp"
                                 android:textColor="@android:color/black"
                                 android:textSize="20sp"
-                                />
+                                android:maxLines="1"
+                                android:ellipsize="end"/>
                         </android.support.design.widget.TextInputLayout>
 
 
@@ -155,7 +154,9 @@
                                 android:padding="15dp"
                                 android:textColor="@android:color/black"
                                 android:textCursorDrawable="@color/colorGreen"
-                                android:textSize="20sp" />
+                                android:textSize="20sp"
+                                android:maxLines="1"
+                                android:ellipsize="end"/>
                         </android.support.design.widget.TextInputLayout>
 
 
@@ -222,9 +223,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/fp_tv_saveplaces"
+                android:layout_marginTop="10dp"
                 app:cardElevation="1dp">
 
                 <LinearLayout
+                    android:id="@+id/fp_ll_work"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -313,26 +316,35 @@
 
                     </LinearLayout>
                 </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/fp_card_address"
+                android:layout_marginTop="20dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPro" />
+
+                <TextView
+                    android:id="@+id/fp_tv_signout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/white"
+                    android:fontFamily="@font/magettas_regular"
+                    android:gravity="bottom"
+                    android:padding="15dp"
+                    android:text="@string/sign_out"
+                    android:textColor="@android:color/black" />
             </android.support.v7.widget.CardView>
         </RelativeLayout>
-    </ScrollView>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_above="@+id/fp_tv_signout"
-        android:background="@color/colorPro" />
-
-    <TextView
-        android:id="@+id/fp_tv_signout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/white"
-        android:fontFamily="@font/magettas_regular"
-        android:gravity="bottom"
-        android:padding="15dp"
-        android:text="@string/sign_out"
-        android:textColor="@android:color/black" />
-
-</RelativeLayout>
+    </LinearLayout>
+</ScrollView>

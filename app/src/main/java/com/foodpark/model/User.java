@@ -12,15 +12,18 @@ public class User {
     private String SurName;
     private String Email;
     private String IsStaff;
+    private String HomeAddress;
+    private String OfficeAddress;
 
     public User() {
     }
 
-    public User(String name, String password,String surName,String email) {
+    public User(String name, String password,String surName,String email,String phone) {
         Name = name;
         Password = password;
         SurName = surName;
         Email = email;
+        Phone = phone;
         IsStaff = "false";
 
     }
@@ -71,5 +74,21 @@ public class User {
 
     public void setPhone(String phone) {
         Phone = phone;
+    }
+
+    public String getHomeAddress() {
+        return HomeAddress;
+    }
+
+    public void setHomeAddress(String homeAddress) {
+        HomeAddress = homeAddress;
+    }
+
+    public String getOfficeAddress() {
+        return OfficeAddress;
+    }
+
+    public void setOfficeAddress(String officeAddress) {
+        OfficeAddress = officeAddress;
     }
 }

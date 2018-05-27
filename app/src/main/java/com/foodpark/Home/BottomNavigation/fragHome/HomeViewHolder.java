@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.foodpark.R;
+import com.foodpark.activities.FoodListActivity;
 import com.foodpark.model.Category;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
@@ -62,13 +63,20 @@ public class HomeViewHolder extends RecyclerView.Adapter<HomeViewHolder.ViewHold
 
         }
 
-        public void onBind(int position) {
+        public void onBind(final int position) {
             txtItemName.setText(categories.get(position).getName().toLowerCase());
             Picasso.with(context).load(categories.get(position).getImage()).memoryPolicy(MemoryPolicy.NO_CACHE)
                     .networkPolicy(NetworkPolicy.NO_CACHE)
                     .into(imageURL);
             fpIVFilledHeart.setOnClickListener(this);
             fpIVEmptyHeart.setOnClickListener(this);
+            imageURL.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("Position",""+categories.get(position).getId());
+                    FoodListActivity.open(context,position,categories.get(position).getId());
+                }
+            });
         }
 
         @Override

@@ -1,5 +1,6 @@
 package com.foodpark.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -183,5 +184,11 @@ public class FoodListActivity extends AppCompatActivity {
         };
 
         mRecyclerFoodList.setAdapter(foodAdapter);
+    }
+
+    public static void open(Context context, int position, String id) {
+        Intent intent = new Intent(context, FoodListActivity.class);
+        intent.putExtra(AppConstants.KEY_CATEGORY_ID, id);
+        context.startActivity(intent);
     }
 }

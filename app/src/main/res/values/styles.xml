@@ -50,4 +50,11 @@
         <item name="android:windowEnterAnimation">@anim/slide_up</item>
         <item name="android:windowExitAnimation">@anim/slide_down</item>
     </style>
+
+    <style name="MyCheckBox" parent="Base.Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:colorControlNormal" tools:targetApi="lollipop">@color/colorGreen</item>
+        <item name="android:colorControlActivated" tools:targetApi="lollipop">@color/colorGreen</item>
+        <item name="android:colorControlHighlight" tools:targetApi="lollipop">@color/colorText</item>
+
+    </style>
 </resources>
