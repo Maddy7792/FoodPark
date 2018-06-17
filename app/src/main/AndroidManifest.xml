@@ -6,9 +6,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
-        android:name=".App.SaveData"
+        android:name=".application.SaveData"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@drawable/app_icon_fp"
@@ -26,10 +27,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Home.HomeActivity"
+            android:name=".home.HomeActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".auth.SignInActivity" />
-        <activity android:name=".auth.SignUpActivity" />
+        <activity android:name=".auth.SignUpActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".activities.NavigationActivity"
             android:label="@string/title_activity_navigation"
@@ -38,7 +40,7 @@
         <activity android:name=".activities.FoodDetailsActivity" />
         <activity android:name=".activities.CartActivity" />
         <activity android:name=".activities.OrderStatusActivity" />
-        <activity android:name=".SelectAuth.SplashLoginActivity" />
+        <activity android:name=".selectAuth.SplashLoginActivity" />
         <activity android:name=".profile.FPFavouriteActivity" />
         <activity android:name=".profile.FPPaymentActivity" />
         <activity android:name=".profile.FPSettingsActivity" />
@@ -50,7 +52,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB0pv-sn3D8pFN2lym-tYuK9hzNQDNUoCY" />
 
-        <activity android:name=".auth.FPForgetPasswordActivity"></activity>
+        <activity android:name=".auth.FPForgetPasswordActivity">
+
+        </activity>
     </application>
 
 </manifest>

@@ -12,6 +12,7 @@
     <color name="colorCoffee">#3E2723</color>
     <color name="colorTextLabel">#BDBDBD</color>
     <color name="colorTrans">#00000000</color>
+    <color name="colorDialogBack">#50000000</color>
     <color name="colorImageBackground">#5D000000</color>
     <color name="colorProfile">#636363</color>
     <color name="colorPro">#2C000000</color>

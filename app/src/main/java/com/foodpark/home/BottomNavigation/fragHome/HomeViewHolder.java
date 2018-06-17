@@ -1,4 +1,4 @@
-package com.foodpark.Home.BottomNavigation.fragHome;
+package com.foodpark.home.BottomNavigation.fragHome;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

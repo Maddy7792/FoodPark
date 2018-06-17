@@ -24,8 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class SignUpActivity extends AppCompatActivity implements View.OnClickListener,
-        AdapterView.OnItemSelectedListener {
+public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     private EditText etName;
@@ -33,13 +32,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private EditText etPhoneNumber;
     private EditText etSurName;
     private EditText etEmail;
+    private EditText etHomeAddress;
+    private EditText etOfcAddress;
     private Button btnSignUp;
     private Toolbar toolbar;
     private TextView fpTVToolBarName;
     private ImageView fpIVBack;
     private FirebaseDatabase database;
     private DatabaseReference table_user;
-    private Spinner fpCountryCode;
     private TextView fpErrorText;
     private String errorText = null;
 
@@ -48,6 +48,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         etName = (EditText) findViewById(R.id.et_Name);
+        etHomeAddress = findViewById(R.id.et_home_address);
+        etOfcAddress = findViewById(R.id.et_office_address);
         etPhoneNumber = (EditText) findViewById(R.id.et_phone_number);
         etPassword = (EditText) findViewById(R.id.et_password);
         btnSignUp = (Button) findViewById(R.id.btn_signup_activity);
@@ -55,7 +57,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         etEmail = findViewById(R.id.et_email);
         fpErrorText = findViewById(R.id.fp_tv_validation_error);
         toolbar = findViewById(R.id.fp_signup_toolbar);
-        fpCountryCode = findViewById(R.id.fp_country_code);
         fpIVBack = toolbar.findViewById(R.id.fp_tv_signup_toolbar_back);
         fpTVToolBarName = toolbar.findViewById(R.id.fp_tv_signup_toolbar_name);
         fpTVToolBarName.setText(getString(R.string.register));
@@ -66,8 +67,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         fpIVBack.setOnClickListener(this);
         database = FirebaseDatabase.getInstance();
         table_user = database.getReference("User");
-        setSpinnerData();
-        fpCountryCode.setOnItemSelectedListener(this);
+
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,7 +96,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     User user = new User(etName.getText().toString(),
                             etPassword.getText().toString(),
                             etSurName.getText().toString(),
-                            etEmail.getText().toString(),etPhoneNumber.getText().toString());
+                            etEmail.getText().toString(), etPhoneNumber.getText().toString(),
+                            etHomeAddress.getText().toString(),etOfcAddress.getText().toString());
                     table_user.child(etPhoneNumber.getText().toString()).setValue(user);
                     Toast.makeText(SignUpActivity.this, "SignUp Successfully",
                             Toast.LENGTH_SHORT).show();
@@ -123,23 +124,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    private void setSpinnerData() {
-        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this,
-                R.array.countryCodes, android.R.layout.simple_spinner_dropdown_item);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        fpCountryCode.setAdapter(arrayAdapter);
-    }
-
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 
     private boolean isValid() {
         if (Validation.isValidName(etName.getText().toString())) {
@@ -147,7 +131,20 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 if (Validation.isValidEmail(etEmail.getText().toString())) {
                     if (Validation.isValidPhoneNumber(etPhoneNumber.getText().toString())) {
                         if (Validation.isValidText(etPassword.getText().toString())) {
-                            return true;
+                            if (Validation.isValidText(etHomeAddress.getText().toString())) {
+                                if (Validation.isValidText(etOfcAddress.getText().toString())) {
+                                    return true;
+                                } else {
+                                    errorText = AppConstants.VALID_OFC_ADDRESS;
+                                    setErrorText(errorText);
+                                    return false;
+                                }
+                            } else {
+                                errorText = AppConstants.VALID_HOME_ADDRESS;
+                                setErrorText(errorText);
+                                return false;
+                            }
+
                         } else {
                             errorText = AppConstants.VALID_PASSWORD;
                             setErrorText(errorText);

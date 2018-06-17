@@ -1,4 +1,4 @@
-package com.foodpark.Home.BottomNavigation.fragProfile;
+package com.foodpark.home.BottomNavigation.fragProfile;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,8 +15,6 @@ import com.foodpark.profile.FPFavouriteActivity;
 import com.foodpark.profile.FPOtherSettingsActivity;
 import com.foodpark.profile.FPPaymentActivity;
 import com.foodpark.profile.FPSettingsActivity;
-
-import java.net.URI;
 
 /**
  * Created by dennis on 10/5/18.

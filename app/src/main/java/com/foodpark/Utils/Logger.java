@@ -3,8 +3,7 @@ package com.foodpark.Utils;
 
 import android.util.Log;
 
-;import com.foodpark.App.SaveData;
-import com.foodpark.BuildConfig;
+;import com.foodpark.application.SaveData;
 
 /**
  * Created by dennis on 14/5/18.

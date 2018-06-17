@@ -1,4 +1,4 @@
-package com.foodpark.Home;
+package com.foodpark.home;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,23 +10,20 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.foodpark.App.SaveData;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.Utils.Utils;
 import com.foodpark.customviews.BottomNavigationViewBehaviour;
 import com.foodpark.dialogs.FPFilterDialog;
-import com.foodpark.Home.BottomNavigation.fragHome.HomeFragment;
-import com.foodpark.Home.BottomNavigation.fragOrder.OrdersFragment;
-import com.foodpark.Home.BottomNavigation.fragProfile.ProfileFragment;
-import com.foodpark.Home.BottomNavigation.fragSearch.SearchFragment;
+import com.foodpark.home.BottomNavigation.fragHome.HomeFragment;
+import com.foodpark.home.BottomNavigation.fragOrder.OrdersFragment;
+import com.foodpark.home.BottomNavigation.fragProfile.ProfileFragment;
+import com.foodpark.home.BottomNavigation.fragSearch.SearchFragment;
 
 import static android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
 

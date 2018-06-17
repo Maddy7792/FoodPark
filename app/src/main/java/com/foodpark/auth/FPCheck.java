@@ -8,10 +8,10 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.foodpark.App.SaveData;
+import com.foodpark.application.SaveData;
 import com.foodpark.Common.Common;
-import com.foodpark.Home.HomeActivity;
-import com.foodpark.SelectAuth.SplashLoginActivity;
+import com.foodpark.home.HomeActivity;
+import com.foodpark.selectAuth.SplashLoginActivity;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.Utils.Utils;
 import com.foodpark.model.User;

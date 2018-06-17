@@ -1,4 +1,4 @@
-package com.foodpark.Home.BottomNavigation.fragOrder;
+package com.foodpark.home.BottomNavigation.fragOrder;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,15 +13,15 @@ import com.foodpark.R;
  * Created by dennis on 26/5/18.
  */
 
-public class UpComingOrdersFragment extends Fragment {
+public class OrdersStatusFragment extends Fragment {
 
-    public UpComingOrdersFragment() {
+    public OrdersStatusFragment() {
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_upcoming_orders,null);
+        View view = inflater.inflate(R.layout.activity_order_status, null);
         return view;
     }
 }

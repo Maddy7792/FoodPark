@@ -63,6 +63,14 @@
     <string name="forget_your_pasword">Forget Your Pasword?</string>
     <string name="message_forget">Enter your Phone Number and we\'ll send you a message to Mobile Number (Charges may apply)</string>
     <string name="reset">Reset</string>
+    <string name="enter_otp_number">Enter Otp Number</string>
+    <string name="enter_new_password">Enter New Password</string>
+    <string name="re_enter_password">Re-enter Password</string>
+    <string name="confirm">Confirm</string>
+    <string name="reset_your_password">Reset Your Password?</string>
+    <string name="please_enter_the_otp_to_verify_your_account">Please Enter the OTP to verify your Account</string>
+    <string name="office_address">Office Address</string>
+    <string name="home_address">Home Address</string>
 
     <string-array name="countryCodes">
         <item>93,AF</item>

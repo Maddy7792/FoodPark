@@ -38,6 +38,11 @@ public class AppConstants {
     public static final String VALID_SUR_NAME = "Enter Valid SurName";
     public static final String VALID_PHONE = "Enter Valid Phone Number";
     public static final String VALID_PASSWORD = "Enter Valid Password";
+    public static final String VALID_HOME_ADDRESS = "Enter Home Address";
+    public static final String VALID_OFC_ADDRESS = "Enter Office Address";
+    public static final String NEW_PASSWORD = "Enter new pasword ";
+    public static final String RETYPE_NEW_PASSWORD = "Enter Re-type Password";
+
 
     public static final String WIDTH = "width";
     public static final String HOME = "Home";
@@ -55,10 +60,21 @@ public class AppConstants {
     public static final String UPLOADING_TEXT = "Uploadig....";
     public static final int PICK_GALLERY_IMAGE = 1;
 
-    public static final String PROFILE_AVATAR= "Profile";
+    public static final String PROFILE_AVATAR = "Profile";
     //Paper Keys
     public static final String KEY_PAPER_PASSWORD = "Password";
     public static final String KEY_PAPER_USER = "User";
+
+    public static final String KEY_APP_NAME = "FoodPark";
+    public static final String KEY_SHARED_PHONE = "phoneNumber";
+    public static final String KEY_OTP_NUMBER = "otp";
+
+    public static final int range = 9;  // to generate a single number with this range, by default its 0..9
+    public static final int length = 4; // by default length is 4
+    public final static int PLACE_AUTOCOMPLETE_REQUEST_CODE_HOME = 1;
+    public final static int PLACE_AUTOCOMPLETE_REQUEST_CODE_OFC = 2;
+    public static final String KEY_HOME = "HOMEADDRESS";
+    public static final String KEY_OFC = "OFCADDRESS";
 
 
 }

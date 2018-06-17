@@ -1,4 +1,4 @@
-package com.foodpark.SelectAuth;
+package com.foodpark.selectAuth;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

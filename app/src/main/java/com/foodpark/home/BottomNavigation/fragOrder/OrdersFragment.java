@@ -1,4 +1,4 @@
-package com.foodpark.Home.BottomNavigation.fragOrder;
+package com.foodpark.home.BottomNavigation.fragOrder;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

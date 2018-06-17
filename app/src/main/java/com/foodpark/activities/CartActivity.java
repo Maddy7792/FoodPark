@@ -59,7 +59,6 @@ public class CartActivity extends AppCompatActivity {
         cartRecyclerView.setLayoutManager(layoutManager);
         carts = new ArrayList<>();
         loadListFoodFromSqlite();
-
         btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

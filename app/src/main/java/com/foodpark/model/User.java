@@ -18,12 +18,15 @@ public class User {
     public User() {
     }
 
-    public User(String name, String password,String surName,String email,String phone) {
+    public User(String name, String password, String surName, String email, String phone,
+                String homeAddress, String officeAddress) {
         Name = name;
         Password = password;
         SurName = surName;
         Email = email;
         Phone = phone;
+        HomeAddress = homeAddress;
+        OfficeAddress = officeAddress;
         IsStaff = "false";
 
     }

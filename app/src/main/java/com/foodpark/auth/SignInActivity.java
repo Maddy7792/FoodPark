@@ -3,7 +3,6 @@ package com.foodpark.auth;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,13 +17,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
-import com.foodpark.App.SaveData;
+import com.foodpark.application.SaveData;
 import com.foodpark.Common.Common;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.Utils.Utils;
 import com.foodpark.Utils.Validation;
-import com.foodpark.Home.HomeActivity;
+import com.foodpark.home.HomeActivity;
 import com.foodpark.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -128,6 +127,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private void setupAccount() {
         final ProgressDialog mDialog = new ProgressDialog(SignInActivity.this);
         mDialog.setMessage("Please waiting..");
+        mDialog.setCancelable(false);
         mDialog.show();
         table_user.addValueEventListener(new ValueEventListener() {
             @Override
@@ -140,13 +140,15 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     if (user.getPassword().equals(etPassword.getText().toString()) &&
                             !etPassword.getText().toString().isEmpty()) {
                         //Remember Me for saving phoneNumber and passwords
-                        if (rememberMe.isChecked()){
-                            Paper.book().write(AppConstants.KEY_PAPER_USER,etPhoneNumber.getText().toString());
-                            Paper.book().write(AppConstants.KEY_PAPER_PASSWORD,etPassword.getText().toString());
-                        }else {
+                        if (rememberMe.isChecked()) {
+                            Paper.book().write(AppConstants.KEY_PAPER_USER, etPhoneNumber.getText().toString());
+                            Paper.book().write(AppConstants.KEY_PAPER_PASSWORD, etPassword.getText().toString());
+                        } else {
                             Paper.book().delete(AppConstants.KEY_PAPER_USER);
                             Paper.book().delete(AppConstants.KEY_PAPER_PASSWORD);
                         }
+                        //store phonenumber for checking forget activity
+                        Utils.storePhoneNumber(context, etPhoneNumber.getText().toString());
                         Intent navigationIntent = new Intent(SignInActivity.this, HomeActivity.class);
                         Common.currentUser = user;
                         user.setPhone(etPhoneNumber.getText().toString());
@@ -178,7 +180,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         int Id = v.getId();
 
         if (Id == R.id.fp_forget_password) {
-            Utils.setNormalIntent(this,FPForgetPasswordActivity.class);
+            Utils.setNormalIntent(this, FPForgetPasswordActivity.class);
         }
 
         if (Id == R.id.fp_tv_register) {
@@ -209,4 +211,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         }
 
     }
+
+
 }

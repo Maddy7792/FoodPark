@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.foodpark.App.SaveData;
+import com.foodpark.application.SaveData;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.Utils.Utils;
@@ -23,7 +23,6 @@ import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,7 +47,6 @@ public class FPSettingsActivity extends AppCompatActivity implements View.OnClic
     private DatabaseReference userReference;
     private PlaceAutocompleteFragment placeAutocompleteFragment;
     private Place address;
-    private final static int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     private Place place;
 
     @Override
@@ -57,9 +55,7 @@ public class FPSettingsActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_fp_settings);
         Paper.init(this);
         database = FirebaseDatabase.getInstance();
-        if (userReference != null) {
-            userReference = database.getReference(AppConstants.KEY_USER);
-        }
+        userReference = database.getReference(AppConstants.KEY_USER);
         Utils.hideKeyboard(this);
         fpToolBar = findViewById(R.id.fp_settings_toolbar);
         fpIVBack = fpToolBar.findViewById(R.id.fp_iv_tb_settings_back);
@@ -83,6 +79,8 @@ public class FPSettingsActivity extends AppCompatActivity implements View.OnClic
                 Log.d("Phone", "" + user.getPhone());
             }
             etEmail.setText(user.getEmail());
+            fpHomeAddress.setText(user.getHomeAddress());
+            fpWorkAddress.setText(user.getOfficeAddress());
         }
 
         fpIVBack.setOnClickListener(this);
@@ -90,7 +88,7 @@ public class FPSettingsActivity extends AppCompatActivity implements View.OnClic
         fpSignOut.setOnClickListener(this);
         fpHomeAddress.setOnClickListener(this);
         fpWorkAddress.setOnClickListener(this);
-       // getUser();
+        // getUser();
     }
 
 
@@ -113,15 +111,15 @@ public class FPSettingsActivity extends AppCompatActivity implements View.OnClic
         }
 
         if (Id == R.id.fp_tv_address_home) {
-            callPlaces();
+            callPlaces(AppConstants.PLACE_AUTOCOMPLETE_REQUEST_CODE_HOME);
         }
 
-        if (Id == R.id.fp_tv_address_work){
-
+        if (Id == R.id.fp_tv_address_work) {
+            callPlaces(AppConstants.PLACE_AUTOCOMPLETE_REQUEST_CODE_OFC);
         }
     }
 
-    private void callPlaces() {
+    private void callPlaces(int constantType) {
         try {
             AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
                     .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS)
@@ -132,7 +130,7 @@ public class FPSettingsActivity extends AppCompatActivity implements View.OnClic
                             .build(this);
 
 
-            startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+            startActivityForResult(intent, constantType);
         } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
             e.printStackTrace();
         }
@@ -141,44 +139,56 @@ public class FPSettingsActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE && data!=null) {
+        if (requestCode == AppConstants.PLACE_AUTOCOMPLETE_REQUEST_CODE_HOME && data != null) {
             if (resultCode == RESULT_OK) {
                 place = PlaceAutocomplete.getPlace(this, data);
                 fpHomeAddress.setText(place.getAddress());
-                if (place!=null){
-                    addPlace(place);
+                if (place != null) {
+                    addPlace(place, AppConstants.KEY_HOME);
                 }
 
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
                 Log.i("STATUS", status.getStatusMessage());
-            } else if (resultCode == RESULT_CANCELED) {
+            }
+        } else if (requestCode == AppConstants.PLACE_AUTOCOMPLETE_REQUEST_CODE_OFC && data != null) {
+            if (resultCode == RESULT_OK) {
+                place = PlaceAutocomplete.getPlace(this, data);
+                fpWorkAddress.setText(place.getAddress());
+                if (place != null) {
+                    addPlace(place, AppConstants.KEY_OFC);
+                }
 
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+                Log.i("STATUS", status.getStatusMessage());
             }
         }
     }
 
-    private void addPlace(final Place place) {
-Log.d("Phone",""+SaveData.getInstance().getUser().getPhone());
-        userReference.child(SaveData.getInstance().getUser().getPhone()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot!=null){
-                    User user = new User();
-                    user.setHomeAddress((place.getAddress().toString()));
-                    userReference.setValue(user);
-                }
+    private void addPlace(final Place place, final String type) {
+        userReference.child(SaveData.getInstance().getPhoneNumber())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.getValue(User.class);
+                        if (user != null) {
+                            if (type.equals(AppConstants.KEY_HOME)) {
+                                user.setHomeAddress(place.getAddress().toString());
+                            } else if (type.equals(AppConstants.KEY_OFC)) {
+                                user.setOfficeAddress(place.getAddress().toString());
+                            }
 
+                            userReference.getRef().child(SaveData.getInstance().getPhoneNumber()).setValue(user);
+                        }
 
-                userReference.removeEventListener(this);
+                    }
 
-            }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+                    }
+                });
     }
 
     private void getUser() {

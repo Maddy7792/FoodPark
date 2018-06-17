@@ -1,4 +1,4 @@
-package com.foodpark.Home.BottomNavigation.fragHome;
+package com.foodpark.home.BottomNavigation.fragHome;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
