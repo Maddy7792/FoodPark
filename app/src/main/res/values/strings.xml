@@ -71,6 +71,11 @@
     <string name="please_enter_the_otp_to_verify_your_account">Please Enter the OTP to verify your Account</string>
     <string name="office_address">Office Address</string>
     <string name="home_address">Home Address</string>
+    <string name="hi_nice_to_meet_you">Hi,nice to meet you</string>
+    <string name="location_second_line">Give us your location to find places that deliver to you</string>
+    <string name="use_current_location">Use current location</string>
+    <string name="location_text">We only access location while you are using the app to improve your order experience</string>
+    <string name="or_select_your_location_manuvally">or select your location manuvally</string>
 
     <string-array name="countryCodes">
         <item>93,AF</item>

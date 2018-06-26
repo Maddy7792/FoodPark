@@ -1,5 +1,6 @@
 package com.foodpark.home.BottomNavigation.fragProfile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.Utils.Utils;
+import com.foodpark.activities.CartActivity;
 import com.foodpark.profile.FPFavouriteActivity;
 import com.foodpark.profile.FPOtherSettingsActivity;
 import com.foodpark.profile.FPPaymentActivity;
@@ -63,7 +65,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             Utils.setNormalIntent(getActivity(), FPPaymentActivity.class);
         }
         if (Id == R.id.fp_ll_help) {
-            Utils.setDataIntent(getActivity(), FPOtherSettingsActivity.class, AppConstants.HELP);
+            Intent intent = new Intent(getActivity(), CartActivity.class);
+            startActivity(intent);
+            //Utils.setDataIntent(getActivity(), FPOtherSettingsActivity.class, AppConstants.HELP);
         }
         if (Id == R.id.fp_ll_freefood) {
             Utils.setDataIntent(getActivity(), FPOtherSettingsActivity.class, AppConstants.FREE_FOOD);

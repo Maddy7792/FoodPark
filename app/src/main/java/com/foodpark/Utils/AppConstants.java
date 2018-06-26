@@ -71,10 +71,12 @@ public class AppConstants {
 
     public static final int range = 9;  // to generate a single number with this range, by default its 0..9
     public static final int length = 4; // by default length is 4
-    public final static int PLACE_AUTOCOMPLETE_REQUEST_CODE_HOME = 1;
-    public final static int PLACE_AUTOCOMPLETE_REQUEST_CODE_OFC = 2;
+    public static final int PLACE_AUTOCOMPLETE_REQUEST_CODE_HOME = 1;
+    public static final int PLACE_AUTOCOMPLETE_REQUEST_CODE_OFC = 2;
     public static final String KEY_HOME = "HOMEADDRESS";
     public static final String KEY_OFC = "OFCADDRESS";
 
-
+    public static final int REQUEST_CHECK_SETTINGS = 1;
+    public static final int ACCESS_FINE_LOCATION_INTENT_ID = 3;
+    public static final String BROADCAST_ACTION = "android.location.PROVIDERS_CHANGED";
 }

@@ -14,7 +14,7 @@ import android.widget.Toast;
 public class FPPermissionUtils extends Activity {
 
     private static final int RequestPermissionCode = 1;
-
+    private static final int RequestLocationPermissionCode = 2;
 
     public static void EnableRuntimePermission(Activity activity) {
         ActivityCompat.requestPermissions(activity, new String[]{
@@ -23,10 +23,49 @@ public class FPPermissionUtils extends Activity {
                 Manifest.permission.CAMERA}, RequestPermissionCode);
     }
 
-    public static void EnableSmsPermissions(Activity activity){
-        ActivityCompat.requestPermissions(activity,new String[]{
+    public static void EnableSmsPermissions(Activity activity) {
+        ActivityCompat.requestPermissions(activity, new String[]{
                 Manifest.permission.SEND_SMS
-        },RequestPermissionCode);
+        }, RequestPermissionCode);
+    }
+
+    public static boolean checkLocationPermissionsStatus(Activity activity) {
+        if (ContextCompat.checkSelfPermission(activity,
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static void EnableLocationPermissions(Activity activity) {
+        ActivityCompat.requestPermissions(activity, new String[]{
+                Manifest.permission.ACCESS_FINE_LOCATION
+        }, RequestLocationPermissionCode);
+    }
+
+    public static boolean checkPermissionStatus(Activity activity) {
+        if (ContextCompat.checkSelfPermission(activity,
+                Manifest.permission.READ_EXTERNAL_STORAGE) +
+                ContextCompat.checkSelfPermission(activity,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) +
+                ContextCompat.checkSelfPermission(activity,
+                        Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public static boolean checkSmsPermissionStatus(Activity activity) {
+        if (ContextCompat.checkSelfPermission(activity,
+                Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -43,31 +82,19 @@ public class FPPermissionUtils extends Activity {
                             "Now your application cannot access Storage.", Toast.LENGTH_LONG).show();
                 }
                 break;
+
+            case RequestLocationPermissionCode:
+                if (PermisionResult.length > 0 && PermisionResult[0]
+                        == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getApplicationContext(), "Permission Granted," +
+                            " Now your application can access Storage.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Permission Canceled, " +
+                            "Now your application cannot access Storage.", Toast.LENGTH_LONG).show();
+                }
+                break;
         }
     }
 
-    public static boolean checkPermissionStatus(Activity activity) {
-        if (ContextCompat.checkSelfPermission(activity,
-                Manifest.permission.READ_EXTERNAL_STORAGE) +
-                ContextCompat.checkSelfPermission(activity,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE) +
-                ContextCompat.checkSelfPermission(activity,
-                        Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        }else{
-            return false;
-        }
-
-    }
-
-    public static boolean checkSmsPermissionStatus(Activity activity){
-        if (ContextCompat.checkSelfPermission(activity,
-                Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED){
-            return true;
-        }else {
-            return false;
-        }
-    }
 
 }

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".location.LocationActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.55"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/magettas_regular"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/hi_nice_to_meet_you"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/verdana"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/location_second_line"
+                android:textColor="@android:color/black"
+                android:textSize="13sp"
+                android:textStyle="normal" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie_location"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="location_animation.json"
+                app:lottie_loop="true" />
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/colorGreen"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="5dp"
+                android:id="@+id/card_current_location">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.8"
+                        android:background="@null"
+                        android:fontFamily="@font/verdana"
+                        android:foregroundGravity="center"
+                        android:gravity="center"
+                        android:padding="15dp"
+                        android:text="@string/use_current_location"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.2"
+                        android:src="@drawable/location_define" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/verdana"
+                android:gravity="center"
+                android:lineSpacingExtra="0.5dp"
+                android:padding="5dp"
+                android:text="@string/location_text"
+                android:textColor="@android:color/black"
+                android:textSize="13sp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/verdana"
+                android:gravity="center"
+                android:text="@string/or_select_your_location_manuvally"
+                android:textColor="@color/colorGreen"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="5dp"
+                android:padding="10dp"
+                android:id="@+id/tv_select_location"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
