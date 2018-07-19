@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <!--Launch Activity-->
+
+        <!-- Launch Activity -->
         <activity android:name=".auth.FPCheck">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,12 +58,9 @@
             android:value="AIzaSyB0pv-sn3D8pFN2lym-tYuK9hzNQDNUoCY" />
 
         <activity android:name=".auth.FPForgetPasswordActivity" />
-        <activity android:name=".location.LocationActivity">
-
-        </activity>
-        <activity android:name=".location.LocationAddressActivity">
-
-        </activity>
+        <activity android:name=".location.LocationActivity"></activity>
+        <activity android:name=".location.LocationAddressActivity"></activity>
+        <activity android:name=".activities.FPViewCartDetailsActivity"></activity>
     </application>
 
 </manifest>

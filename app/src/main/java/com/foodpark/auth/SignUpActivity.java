@@ -67,7 +67,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         fpIVBack.setOnClickListener(this);
         database = FirebaseDatabase.getInstance();
         table_user = database.getReference("User");
-
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

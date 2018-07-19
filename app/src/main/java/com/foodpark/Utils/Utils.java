@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
@@ -228,6 +229,11 @@ public class Utils {
         return randomNumber;
     }
 
+    public ColorStateList setBottomTintColor(Context context){
+        int colorInt = context.getResources().getColor(R.color.colorPrimary);
+        ColorStateList csl = ColorStateList.valueOf(colorInt);
 
+        return csl;
+    }
 
 }

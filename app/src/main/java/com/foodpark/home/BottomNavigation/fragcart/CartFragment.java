@@ -1,13 +1,15 @@
-package com.foodpark.activities;
+package com.foodpark.home.BottomNavigation.fragcart;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -18,8 +20,8 @@ import com.foodpark.Common.Common;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.ViewHolders.CartAdapter;
+import com.foodpark.activities.CartActivity;
 import com.foodpark.database.Database;
-import com.foodpark.model.Food;
 import com.foodpark.model.Order;
 import com.foodpark.model.Request;
 import com.google.firebase.database.DatabaseReference;
@@ -30,8 +32,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class CartActivity extends AppCompatActivity {
+/**
+ * Created by dennis on 26/5/18.
+ */
 
+public class CartFragment extends Fragment {
 
     private RecyclerView cartRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -44,17 +49,21 @@ public class CartActivity extends AppCompatActivity {
     List<Order> carts;
     CartAdapter cartAdapter;
 
+    public CartFragment() {
+    }
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.layout_cart_fragment, null);
+
         cartDatabase = FirebaseDatabase.getInstance();
         cartReference = cartDatabase.getReference(AppConstants.KEY_REQUESTS);
-        totalAmount = (TextView)findViewById(R.id.total_price);
-        btnPlaceOrder=(Button)findViewById(R.id.btn_place_order);
-        cartRecyclerView=(RecyclerView)findViewById(R.id.listCart);
+        totalAmount = (TextView)view.findViewById(R.id.total_price);
+        btnPlaceOrder=(Button)view.findViewById(R.id.btn_place_order);
+        cartRecyclerView=(RecyclerView)view.findViewById(R.id.listCart);
         cartRecyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(getActivity());
         cartRecyclerView.setLayoutManager(layoutManager);
         carts = new ArrayList<>();
         loadListFoodFromSqlite();
@@ -64,14 +73,15 @@ public class CartActivity extends AppCompatActivity {
                 showAlertDialogForAddress();
             }
         });
+        return view;
     }
 
     private void showAlertDialogForAddress() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(CartActivity.this);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         alertDialog.setMessage("Enter Your Address");
         alertDialog.setTitle("One More Step!");
 
-        final EditText etAddress = new EditText(CartActivity.this);
+        final EditText etAddress = new EditText(getActivity());
 
         LinearLayout.LayoutParams alertLinear = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT
                 ,LinearLayout.LayoutParams.MATCH_PARENT);
@@ -93,9 +103,10 @@ public class CartActivity extends AppCompatActivity {
                 );
 
                 cartReference.child(String.valueOf(System.currentTimeMillis())).setValue(request);
-                new Database(CartActivity.this).deleteToCart();
-                Toast.makeText(CartActivity.this, "Thank You, Order place", Toast.LENGTH_SHORT).show();
-                finish();
+                new Database(getActivity()).deleteToCart();
+                restartFragment();
+                Toast.makeText(getActivity(), "Thank You, Order place", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -110,8 +121,8 @@ public class CartActivity extends AppCompatActivity {
 
     private void loadListFoodFromSqlite() {
 
-        carts = new Database(this).getCarts();
-        cartAdapter = new CartAdapter(carts,this);
+        carts = new Database(getActivity()).getCarts();
+        cartAdapter = new CartAdapter(carts,getActivity());
         cartRecyclerView.setAdapter(cartAdapter);
 
         int total = 0;
@@ -121,5 +132,20 @@ public class CartActivity extends AppCompatActivity {
         Locale locale = new Locale("en","US");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
         totalAmount.setText(fmt.format(total));
+    }
+
+
+    private void restartFragment(){
+        CartFragment fragment = null;
+        if (getFragmentManager() != null) {
+            fragment = (CartFragment)
+                    getFragmentManager().findFragmentById(R.id.fp_home);
+            getFragmentManager().beginTransaction()
+                    .detach(fragment)
+                    .attach(fragment)
+                    .commit();
+        }
+
+
     }
 }

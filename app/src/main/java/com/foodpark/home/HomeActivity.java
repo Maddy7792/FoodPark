@@ -1,5 +1,6 @@
 package com.foodpark.home;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -24,6 +25,7 @@ import com.foodpark.home.BottomNavigation.fragHome.HomeFragment;
 import com.foodpark.home.BottomNavigation.fragOrder.OrdersFragment;
 import com.foodpark.home.BottomNavigation.fragProfile.ProfileFragment;
 import com.foodpark.home.BottomNavigation.fragSearch.SearchFragment;
+import com.foodpark.home.BottomNavigation.fragcart.CartFragment;
 
 import static android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
 
@@ -84,6 +86,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     switch (item.getItemId()) {
                         case R.id.fp_bn_home:
                             fpTVToolbarName.setText(AppConstants.HOME);
+
                             showViews();
                             fragment = new HomeFragment();
                             loadFragment(fragment, AppConstants.HOME);
@@ -105,6 +108,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                             hideViews();
                             fragment = new ProfileFragment();
                             loadFragment(fragment, AppConstants.FRAGMENT_OTHER);
+                            return true;
+
+                        case R.id.fp_bn_cart:
+                            fpTVToolbarName.setText(AppConstants.CART);
+                            hideViews();
+                            fragment = new CartFragment();
+                            loadFragment(fragment,AppConstants.FRAGMENT_OTHER);
                             return true;
                     }
                     return false;
@@ -154,5 +164,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private void showViews() {
         fpIVFilter.setVisibility(View.VISIBLE);
     }
+
+
+
 
 }

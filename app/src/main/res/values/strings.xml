@@ -76,6 +76,15 @@
     <string name="use_current_location">Use current location</string>
     <string name="location_text">We only access location while you are using the app to improve your order experience</string>
     <string name="or_select_your_location_manuvally">or select your location manuvally</string>
+    <string name="cart">Cart</string>
+    <string name="orders">Orders</string>
+    <string name="search">Search</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="food_name">Food Name</string>
+    <string name="items_in_cart">Items in cart</string>
+    <string name="_140_00">$140.00</string>
+    <string name="plus_taxes">plus taxes</string>
 
     <string-array name="countryCodes">
         <item>93,AF</item>

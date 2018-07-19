@@ -16,4 +16,5 @@
     <color name="colorImageBackground">#5D000000</color>
     <color name="colorProfile">#636363</color>
     <color name="colorPro">#2C000000</color>
+    <color name="colorCart">#BFFFAA</color>
 </resources>

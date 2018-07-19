@@ -50,6 +50,7 @@ public class AppConstants {
     public static final String ORDERS = "Orders";
     public static final String PROFILE = "Profile";
     public static final String FRAGMENT_OTHER = "OTHER";
+    public static final String CART = "Cart";
 
     public static final String PROMOTIONS = "Promotions";
     public static final String HELP = "Help";
@@ -79,4 +80,8 @@ public class AppConstants {
     public static final int REQUEST_CHECK_SETTINGS = 1;
     public static final int ACCESS_FINE_LOCATION_INTENT_ID = 3;
     public static final String BROADCAST_ACTION = "android.location.PROVIDERS_CHANGED";
+
+
+    public static final String KEY_UPDATE = "Update";
+    public static final String KEY_DELETE = "Delete";
 }

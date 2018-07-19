@@ -1,9 +1,11 @@
 package com.foodpark.activities;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.foodpark.Common.Common;
@@ -59,6 +61,7 @@ public class OrderStatusActivity extends AppCompatActivity {
         };
 
         listOfOrders.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     private String convertCodeToStatus(String status) {
@@ -68,5 +71,25 @@ public class OrderStatusActivity extends AppCompatActivity {
             return "On my way";
         else
             return "Shipped";
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getIntent().equals(AppConstants.KEY_UPDATE)){
+            showUpdateDialog(adapter.getRef(item.getOrder()).getKey(),adapter.getItem(item.getOrder()));
+        }else if (item.getIntent().equals(AppConstants.KEY_DELETE)){
+            deleteOrder(adapter.getRef(item.getOrder()).getKey());
+        }
+
+        return super.onContextItemSelected(item);
+    }
+
+    private void deleteOrder(String key) {
+
+    }
+
+    private void showUpdateDialog(String key, Request item) {
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(OrderStatusActivity.this);
+        dialog.setTitle("");
     }
 }

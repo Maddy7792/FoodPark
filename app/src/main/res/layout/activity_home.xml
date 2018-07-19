@@ -70,7 +70,8 @@
         android:layout_gravity="bottom"
         android:background="@android:color/white"
         android:isScrollContainer="false"
-        app:itemIconTint="@android:color/black"
+        app:itemIconTint="@color/selection_bottom_color"
+        app:itemTextColor="@color/selection_bottom_color"
         app:menu="@menu/menu_bottom_navigation"
         app:elevation="5dp"
         android:elevation="5dp" />
