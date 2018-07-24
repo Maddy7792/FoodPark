@@ -86,7 +86,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     switch (item.getItemId()) {
                         case R.id.fp_bn_home:
                             fpTVToolbarName.setText(AppConstants.HOME);
-
                             showViews();
                             fragment = new HomeFragment();
                             loadFragment(fragment, AppConstants.HOME);

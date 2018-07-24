@@ -39,7 +39,7 @@ public class OrdersFragment extends Fragment {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new OrdersStatusFragment(),"Orders");
         adapter.addFragment(new UpComingOrdersFragment(),"UpComing");
         viewPager.setAdapter(adapter);
@@ -75,4 +75,6 @@ public class OrdersFragment extends Fragment {
             return mFragmentTitleList.get(position);
         }
     }
+
+
 }

@@ -37,7 +37,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
     public void onBindViewHolder(CartViewHolder holder, int position) {
         TextDrawable drawable = TextDrawable.builder()
                 .buildRound(""+listData.get(position).getQuantity(), Color.RED);
-        holder.cart_item_count.setImageDrawable(drawable);
+        //holder.cart_item_count.setImageDrawable(drawable);
         holder.cart_item_name.setText(listData.get(position).getProductName());
         Locale locale = new Locale("en","US");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);

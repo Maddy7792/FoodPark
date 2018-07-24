@@ -5,56 +5,125 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="4dp"
-    android:layout_margin="8dp">
-
+    android:layout_margin="8dp"
+    app:cardCornerRadius="5dp"
+    app:cardPreventCornerOverlap="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_gravity="center_vertical">
-        
-        
         <LinearLayout
-            android:layout_weight="9"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/food"
+                android:scaleType="centerCrop"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp">
 
-            <TextView
-                android:id="@+id/cart_item_name"
-                android:text="Food 01"
-                android:textStyle="bold"
-                android:fontFamily="@font/verdana"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical|start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/restaurants_name"
+                    android:id="@+id/fp_tv_cart_rest_name"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/magettas_regular"
+                    android:padding="2dp"/>
 
-            <TextView
-                android:id="@+id/cart_item_price"
-                android:text="10,000"
-                android:textStyle="italic"
-                android:fontFamily="@font/verdana"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical|start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/address"
+                    android:id="@+id/fp_tv_cart_rest_address"
+                    android:layout_below="@+id/fp_tv_cart_rest_name"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/magettas_regular"
+                   />
+            </RelativeLayout>
+
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:background="@color/screenBackground"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
 
-        <ImageView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
 
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical|end"
-            android:layout_marginRight="16dp"
-            android:id="@+id/cart_item_count"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ITEMS"
+                android:textSize="15sp"
+                android:fontFamily="@font/magettas_regular"
+                android:textColor="@color/screenBackground"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Item Name"
+                android:id="@+id/cart_item_name"
+                android:textSize="15sp"
+                android:fontFamily="@font/magettas_regular"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Amount"
+                android:textSize="15sp"
+                android:textColor="@color/screenBackground"
+                android:fontFamily="@font/magettas_regular"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/_140_00"
+                android:id="@+id/cart_item_price"
+                android:textSize="15sp"
+                android:fontFamily="@font/magettas_regular"
+                />
+        </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:background="@color/screenBackground"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fp_tv_cart_checkout"
+            android:text="@string/checkout"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:textSize="17sp"
+            android:textColor="@color/colorGreen"
+            android:fontFamily="@font/magettas_regular"
+            android:visibility="gone"/>
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

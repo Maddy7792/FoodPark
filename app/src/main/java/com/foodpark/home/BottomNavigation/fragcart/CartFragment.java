@@ -56,7 +56,6 @@ public class CartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_cart_fragment, null);
-
         cartDatabase = FirebaseDatabase.getInstance();
         cartReference = cartDatabase.getReference(AppConstants.KEY_REQUESTS);
         totalAmount = (TextView)view.findViewById(R.id.total_price);
@@ -80,9 +79,7 @@ public class CartFragment extends Fragment {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         alertDialog.setMessage("Enter Your Address");
         alertDialog.setTitle("One More Step!");
-
         final EditText etAddress = new EditText(getActivity());
-
         LinearLayout.LayoutParams alertLinear = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT
                 ,LinearLayout.LayoutParams.MATCH_PARENT);
 
