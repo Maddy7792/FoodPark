@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.foodpark.Interfaces.OnItemClickListener;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.ViewHolders.FoodListViewHolder;
+import com.foodpark.database.Database;
 import com.foodpark.model.Food;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,20 +43,19 @@ public class FoodListActivity extends AppCompatActivity {
     private MaterialSearchBar searchBar;
     private List<String> suggestList = new ArrayList<>();
     private FirebaseRecyclerAdapter<Food, FoodListViewHolder> searchAdapter;
+    private Database localDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_list);
-
         mRecyclerFoodList = (RecyclerView) findViewById(R.id.recycler_food_list);
         mRecyclerFoodList.setHasFixedSize(true);
         mlayoutManager = new LinearLayoutManager(FoodListActivity.this);
         mRecyclerFoodList.setLayoutManager(mlayoutManager);
-
         mFoodDataBase = FirebaseDatabase.getInstance();
         mFoodDataReference = mFoodDataBase.getReference().child(AppConstants.KEY_FOOD);
-
+        localDB = new Database(this);
         if (getIntent() != null) {
             categoryId = getIntent().getStringExtra(AppConstants.KEY_CATEGORY_ID);
         }
@@ -166,10 +167,29 @@ public class FoodListActivity extends AppCompatActivity {
                 FoodListViewHolder.class,
                 mFoodDataReference.orderByChild(AppConstants.KEY_MENU_ID).equalTo(categoryId)) {
             @Override
-            protected void populateViewHolder(FoodListViewHolder viewHolder, Food model, final int position) {
+            protected void populateViewHolder(final FoodListViewHolder viewHolder, Food model, final int position) {
                 viewHolder.mFoodName.setText(model.getName());
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.mFoodImageURL);
                 final Food local = model;
+                //Add Favourites
+
+                if (localDB.isFavourite(foodAdapter.getRef(position).getKey())){
+                    viewHolder.mFoodFavouriteImage.setImageResource(R.drawable.filled_heart);
+                }
+
+                viewHolder.mFoodFavouriteImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!localDB.isFavourite(foodAdapter.getRef(position).getKey())){
+                            localDB.addToFavourite(foodAdapter.getRef(position).getKey());
+                            viewHolder.mFoodFavouriteImage.setImageResource(R.drawable.filled_heart);
+                        }else {
+                            localDB.removeFavourite(foodAdapter.getRef(position).getKey());
+                            viewHolder.mFoodFavouriteImage.setImageResource(R.drawable.empty_heart);
+                            Log.d("FoodPark-Favorite",""+localDB.isFavourite(foodAdapter.getRef(position).getKey()));
+                        }
+                    }
+                });
 
                 viewHolder.setOnItemClickListener(new OnItemClickListener() {
                     @Override

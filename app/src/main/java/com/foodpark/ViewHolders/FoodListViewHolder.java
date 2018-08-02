@@ -15,12 +15,14 @@ import com.foodpark.R;
 public class FoodListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     public TextView mFoodName;
     public ImageView mFoodImageURL;
+    public ImageView mFoodFavouriteImage;
     public OnItemClickListener onItemClickListener;
 
     public FoodListViewHolder(View itemView) {
         super(itemView);
         mFoodName = (TextView) itemView.findViewById(R.id.food_text);
         mFoodImageURL = (ImageView) itemView.findViewById(R.id.food_image);
+        mFoodFavouriteImage = (ImageView) itemView.findViewById(R.id.favourite_image);
         itemView.setOnClickListener(this);
     }
 

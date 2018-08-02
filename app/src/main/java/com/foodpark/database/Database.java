@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 
+import com.foodpark.model.Food;
 import com.foodpark.model.Order;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
@@ -63,5 +64,29 @@ public class Database extends SQLiteAssetHelper {
         SQLiteDatabase db = getReadableDatabase();
         String query = String.format("DELETE FROM OrderDetail");
         db.execSQL(query);
+    }
+
+    public void addToFavourite(String foodId){
+        SQLiteDatabase db = getReadableDatabase();
+        String query = String.format("INSERT INTO Favorites(FoodId) VALUES('%s');",foodId);
+        db.execSQL(query);
+    }
+
+    public void removeFavourite(String FoodId){
+        SQLiteDatabase db = getReadableDatabase();
+        String query = String.format("DELETE FROM Favorites WHERE FoodId='%s';",FoodId);
+        db.execSQL(query);
+    }
+
+    public boolean isFavourite(String FoodId){
+        SQLiteDatabase db = getReadableDatabase();
+        String query = String.format("SELECT * FROM Favorites WHERE FoodId='%s'",FoodId);
+        Cursor cursor = db.rawQuery(query,null);
+        if (cursor.getCount() <= 0){
+            cursor.close();
+            return false;
+        }
+        cursor.close();
+        return true;
     }
 }
