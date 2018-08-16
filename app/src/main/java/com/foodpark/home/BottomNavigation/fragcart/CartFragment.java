@@ -1,7 +1,9 @@
 package com.foodpark.home.BottomNavigation.fragcart;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -17,20 +19,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.foodpark.Common.Common;
+import com.foodpark.Common.Config;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.ViewHolders.CartAdapter;
-import com.foodpark.activities.CartActivity;
 import com.foodpark.database.Database;
 import com.foodpark.model.Order;
 import com.foodpark.model.Request;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
 
+import org.json.JSONObject;
+
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by dennis on 26/5/18.
@@ -38,6 +51,7 @@ import java.util.Locale;
 
 public class CartFragment extends Fragment {
 
+    private static final int PAYPAL_REQ_CODE = 7792;
     private RecyclerView cartRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private TextView totalAmount;
@@ -45,9 +59,14 @@ public class CartFragment extends Fragment {
     private FirebaseDatabase cartDatabase;
     private DatabaseReference cartReference;
     private String status = AppConstants.KEY_ORDER_PLACED;
+    private String address;
 
     List<Order> carts;
     CartAdapter cartAdapter;
+
+    static PayPalConfiguration configuration =  new PayPalConfiguration()
+            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
+            .clientId(Config.PAYPAL_CLIENT_KEY);
 
     public CartFragment() {
     }
@@ -75,6 +94,19 @@ public class CartFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Intent intent = new Intent(getActivity(), PayPalService.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,configuration);
+        if (getActivity()!=null){
+            getActivity().startService(intent);
+        }else {
+            Toast.makeText(getActivity(), "Activity is null", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     private void showAlertDialogForAddress() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         alertDialog.setMessage("Enter Your Address");
@@ -91,19 +123,18 @@ public class CartFragment extends Fragment {
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                address = etAddress.getText().toString();
                 Request request = new Request(
                         Common.currentUser.getPhone(),
                         Common.currentUser.getName(),
-                        etAddress.getText().toString(),
+                        address,
                         carts,
-                        totalAmount.getText().toString()
+                        totalAmount.getText().toString(),"0"
                 );
-
                 cartReference.child(String.valueOf(System.currentTimeMillis())).setValue(request);
                 new Database(getActivity()).deleteToCart();
                 restartFragment();
                 Toast.makeText(getActivity(), "Thank You, Order place", Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -143,6 +174,6 @@ public class CartFragment extends Fragment {
                     .commit();
         }
 
-
     }
+
 }

@@ -15,15 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.foodpark.R;
-import com.foodpark.Utils.AppConstants;
 import com.foodpark.Utils.FPPermissionUtils;
 import com.foodpark.Utils.Utils;
-import com.foodpark.application.SaveData;
+import com.foodpark.application.App;
 import com.foodpark.dialogs.ChangePasswordDialog;
-
-import io.paperdb.Paper;
 
 public class FPForgetPasswordActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -93,8 +89,8 @@ public class FPForgetPasswordActivity extends AppCompatActivity implements View.
         if (Id == R.id.btn_forget){
             if (!TextUtils.isEmpty(etForget.getText().toString()) && phoneNumber!=null
                     && phoneNumber.matches(etForget.getText().toString())){
-                SaveData.getInstance().setPhoneNumber(etForget.getText().toString());
-                //Utils.sendOTPToUsers(this,phoneNumber,Utils.generateRandomNumber());
+                App.getInstance().setPhoneNumber(etForget.getText().toString());
+                Utils.sendOTPToUsers(this,phoneNumber,Utils.generateRandomNumber());
                 Utils.storeOtpNumber(this,Utils.generateRandomNumber());
                 btnReset.setEnabled(false);
                 btnReset.setAlpha(0.5f);

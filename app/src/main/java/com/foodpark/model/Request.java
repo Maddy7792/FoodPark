@@ -9,7 +9,6 @@ import java.util.List;
  */
 
 public class Request {
-
     private String phone;
     private String name;
     private String address;
@@ -21,21 +20,24 @@ public class Request {
     public Request() {
     }
 
-    public Request(String phone, String name, String address, List<Order> foods, String total) {
+    public Request( String phone, String name, String address, List<Order> foods, String total, String status) {
         this.phone = phone;
         this.name = name;
         this.address = address;
         this.foods = foods;
         this.total = total;
-
-        /*
-        *
-        * 0 - placed
-        * 1- shipping
-        * 2- shipped
-        *
-        * */
+        this.status = status;
     }
+
+    /*
+     *
+     * 0 - placed
+     * 1- shipping
+     * 2- shipped
+     *
+     * */
+
+
 
     public String getPhone() {
         return phone;

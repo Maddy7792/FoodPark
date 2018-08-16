@@ -84,4 +84,6 @@ public class AppConstants {
 
     public static final String KEY_UPDATE = "Update";
     public static final String KEY_DELETE = "Delete";
+
+    public static final String KEY_FAV = "Favourites";
 }

@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.foodpark.application.SaveData;
+import com.foodpark.application.App;
 import com.foodpark.Common.Common;
 import com.foodpark.home.HomeActivity;
 import com.foodpark.selectAuth.SplashLoginActivity;
@@ -66,7 +66,7 @@ public class FPCheck extends Activity {
         table_user.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                SaveData.getInstance().setPhoneNumber(phone);
+                App.getInstance().setPhoneNumber(phone);
                 if (dataSnapshot.child(phone).exists() && !phone.isEmpty()) {
                     User user = dataSnapshot.child(phone).getValue(User.class);
                     if (user.getPassword().equals(password) && !password.isEmpty()) {
@@ -74,7 +74,7 @@ public class FPCheck extends Activity {
                         Common.currentUser = user;
                         user.setPhone(phone);
                         Log.d("PhoneNumber", "" + user.getPhone());
-                        SaveData.getInstance().setUser(user);
+                        App.getInstance().setUser(user);
                         startActivity(navigationIntent);
                         table_user.removeEventListener(this);
                         finish();

@@ -8,16 +8,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.foodpark.Interfaces.OnItemClickListener;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.ViewHolders.FoodListViewHolder;
+import com.foodpark.application.App;
 import com.foodpark.database.Database;
+import com.foodpark.model.Favourites;
 import com.foodpark.model.Food;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -167,26 +167,35 @@ public class FoodListActivity extends AppCompatActivity {
                 FoodListViewHolder.class,
                 mFoodDataReference.orderByChild(AppConstants.KEY_MENU_ID).equalTo(categoryId)) {
             @Override
-            protected void populateViewHolder(final FoodListViewHolder viewHolder, Food model, final int position) {
+            protected void populateViewHolder(final FoodListViewHolder viewHolder, final Food model, final int position) {
                 viewHolder.mFoodName.setText(model.getName());
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.mFoodImageURL);
                 final Food local = model;
                 //Add Favourites
 
-                if (localDB.isFavourite(foodAdapter.getRef(position).getKey())){
+                if (localDB.isFavourite(foodAdapter.getRef(position).getKey(), App.getInstance().getPhoneNumber())){
                     viewHolder.mFoodFavouriteImage.setImageResource(R.drawable.filled_heart);
                 }
 
                 viewHolder.mFoodFavouriteImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (!localDB.isFavourite(foodAdapter.getRef(position).getKey())){
-                            localDB.addToFavourite(foodAdapter.getRef(position).getKey());
+                        Favourites favourites = new Favourites();
+                        favourites.setFoodId(foodAdapter.getRef(position).getKey());
+                        favourites.setFoodDescription(model.getDescription());
+                        favourites.setFoodDiscount(model.getDiscount());
+                        favourites.setFoodImage(model.getImage());
+                        favourites.setFoodMenuId(model.getMenuId());
+                        favourites.setFoodName(model.getName());
+                        favourites.setFoodPrice(model.getPrice());
+                        favourites.setUserPhone(App.getInstance().getPhoneNumber());
+                        if (!localDB.isFavourite(foodAdapter.getRef(position).getKey(), App.getInstance().getPhoneNumber())){
+                            localDB.addToFavourite(favourites);
                             viewHolder.mFoodFavouriteImage.setImageResource(R.drawable.filled_heart);
                         }else {
-                            localDB.removeFavourite(foodAdapter.getRef(position).getKey());
+                            localDB.removeFavourite(foodAdapter.getRef(position).getKey(),
+                                    App.getInstance().getPhoneNumber());
                             viewHolder.mFoodFavouriteImage.setImageResource(R.drawable.empty_heart);
-                            Log.d("FoodPark-Favorite",""+localDB.isFavourite(foodAdapter.getRef(position).getKey()));
                         }
                     }
                 });

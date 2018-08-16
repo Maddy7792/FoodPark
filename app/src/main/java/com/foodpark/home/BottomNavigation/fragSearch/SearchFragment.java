@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.foodpark.application.SaveData;
+import com.foodpark.application.App;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.Utils.Utils;
@@ -107,7 +107,7 @@ public class SearchFragment extends Fragment implements
 
     private void startSearch(final String query) {
         Log.d("Query", "" + query);
-        SaveData.getInstance().setSearchQuery(query);
+        App.getInstance().setSearchQuery(query);
         Query topReference = refTopCatories.orderByChild(AppConstants.SEARCH_KEY).startAt(query).endAt(query + "\uf8ff");
         topReference.addValueEventListener(new ValueEventListener() {
             @Override

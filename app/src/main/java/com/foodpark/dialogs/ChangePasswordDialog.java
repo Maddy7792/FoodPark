@@ -22,8 +22,7 @@ import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.Utils.Utils;
 import com.foodpark.Utils.Validation;
-import com.foodpark.application.SaveData;
-import com.foodpark.auth.FPForgetPasswordActivity;
+import com.foodpark.application.App;
 import com.foodpark.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -129,14 +128,14 @@ public class ChangePasswordDialog extends DialogFragment implements View.OnClick
     /*Update the password
      * */
     private void updatePassword(final String newPassword) {
-        userReference.child(SaveData.getInstance().getPhoneNumber())
+        userReference.child(App.getInstance().getPhoneNumber())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User user = dataSnapshot.getValue(User.class);
                         if (user != null) {
                             user.setPassword(newPassword);
-                            userReference.getRef().child(SaveData.getInstance().getPhoneNumber()).setValue(user);
+                            userReference.getRef().child(App.getInstance().getPhoneNumber()).setValue(user);
                         }
                         userReference.removeEventListener(this);
                         lottieAnimationView.setVisibility(View.GONE);

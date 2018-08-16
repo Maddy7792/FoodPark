@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
-import com.foodpark.application.SaveData;
+import com.foodpark.application.App;
 import com.foodpark.Common.Common;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
@@ -132,7 +132,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         table_user.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                SaveData.getInstance().setPhoneNumber(etPhoneNumber.getText().toString());
+                App.getInstance().setPhoneNumber(etPhoneNumber.getText().toString());
                 if (dataSnapshot.child(etPhoneNumber.getText().toString()).exists() &&
                         !etPhoneNumber.getText().toString().isEmpty()) {
                     mDialog.dismiss();
@@ -153,7 +153,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         Common.currentUser = user;
                         user.setPhone(etPhoneNumber.getText().toString());
                         Log.d("PhoneNumber", "" + user.getPhone());
-                        SaveData.getInstance().setUser(user);
+                        App.getInstance().setUser(user);
                         startActivity(navigationIntent);
                         table_user.removeEventListener(this);
                         finish();

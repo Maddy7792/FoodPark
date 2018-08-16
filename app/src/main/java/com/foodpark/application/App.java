@@ -8,9 +8,9 @@ import com.foodpark.model.User;
  * Created by dennis on 10/5/18.
  */
 
-public class SaveData extends Application {
+public class App extends Application {
 
-    private static SaveData mInstance;
+    private static App mInstance;
     public static boolean IS_DEBUG = true;
     private String searchQuery;
     private User user;
@@ -21,7 +21,7 @@ public class SaveData extends Application {
         mInstance = this;
     }
 
-    public static synchronized SaveData getInstance(){
+    public static synchronized App getInstance(){
         return mInstance;
     }
 

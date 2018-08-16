@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="5dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/fp_ll_foreground">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/food"
+                android:scaleType="centerCrop"
+                android:id="@+id/fp_fav_image"
+                android:layout_gravity="center_vertical"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Food Name"
+                    android:id="@+id/fp_tv_fav_food_name"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/magettas_regular"
+                    android:padding="2dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Food Description"
+                    android:id="@+id/fp_tv_fav_desc"
+                    android:layout_below="@+id/fp_tv_fav_food_name"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/magettas_regular"
+                   />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

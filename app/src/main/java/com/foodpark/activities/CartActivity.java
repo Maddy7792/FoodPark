@@ -89,7 +89,7 @@ public class CartActivity extends AppCompatActivity {
                         Common.currentUser.getName(),
                         etAddress.getText().toString(),
                         carts,
-                        totalAmount.getText().toString()
+                        totalAmount.getText().toString(),"0"
                 );
 
                 cartReference.child(String.valueOf(System.currentTimeMillis())).setValue(request);

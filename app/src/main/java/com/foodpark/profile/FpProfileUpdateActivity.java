@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.foodpark.application.SaveData;
+import com.foodpark.application.App;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.model.User;
@@ -39,7 +39,7 @@ public class FpProfileUpdateActivity extends AppCompatActivity implements View.O
         setContentView(R.layout.activity_fp_profile_update);
         database = FirebaseDatabase.getInstance();
         userRefDatabase = database.getReference(AppConstants.KEY_USER).
-                child(SaveData.getInstance().getPhoneNumber());
+                child(App.getInstance().getPhoneNumber());
         toolbar = findViewById(R.id.fp_toolbar);
         Back = toolbar.findViewById(R.id.fp_iv_update_back);
         tvName = findViewById(R.id.fp_tv_update_text);

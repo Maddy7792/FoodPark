@@ -23,7 +23,7 @@ import java.util.Locale;
  * Created by dennis on 18/2/18.
  */
 
-class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     public TextView cart_item_name;
     public TextView cart_item_price;
     //public ImageView cart_item_count;

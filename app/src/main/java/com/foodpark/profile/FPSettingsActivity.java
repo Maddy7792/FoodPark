@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.foodpark.application.SaveData;
+import com.foodpark.application.App;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.Utils.Utils;
@@ -70,11 +70,11 @@ public class FPSettingsActivity extends AppCompatActivity implements View.OnClic
         fpSignOut = findViewById(R.id.fp_tv_signout);
         fpWorkAddress = findViewById(R.id.fp_tv_address_work);
         fpHomeAddress = findViewById(R.id.fp_tv_address_home);
-        if (SaveData.getInstance().getUser() != null) {
-            User user = SaveData.getInstance().getUser();
+        if (App.getInstance().getUser() != null) {
+            User user = App.getInstance().getUser();
             etName.setText(user.getName());
             etSurName.setText(user.getSurName());
-            if (SaveData.getInstance().getPhoneNumber() != null) {
+            if (App.getInstance().getPhoneNumber() != null) {
                 etPhoneNumber.setText(user.getPhone());
                 Log.d("Phone", "" + user.getPhone());
             }
@@ -167,7 +167,7 @@ public class FPSettingsActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void addPlace(final Place place, final String type) {
-        userReference.child(SaveData.getInstance().getPhoneNumber())
+        userReference.child(App.getInstance().getPhoneNumber())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -179,7 +179,7 @@ public class FPSettingsActivity extends AppCompatActivity implements View.OnClic
                                 user.setOfficeAddress(place.getAddress().toString());
                             }
 
-                            userReference.getRef().child(SaveData.getInstance().getPhoneNumber()).setValue(user);
+                            userReference.getRef().child(App.getInstance().getPhoneNumber()).setValue(user);
                         }
 
                     }
@@ -196,7 +196,7 @@ public class FPSettingsActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                SaveData.getInstance().setUser(user);
+                App.getInstance().setUser(user);
                 userReference.removeEventListener(this);
             }
 

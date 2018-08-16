@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.foodpark.application.SaveData;
+import com.foodpark.application.App;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.model.Profile;
@@ -86,7 +86,7 @@ public class FPProfileEditActivity extends AppCompatActivity implements View.OnC
 
 
     private void setDetails() {
-        user = SaveData.getInstance().getUser();
+        user = App.getInstance().getUser();
         fpTVName.setText(user.getName());
         fpTVSurname.setText(user.getSurName());
         fpTVEmail.setText(user.getEmail());
@@ -183,9 +183,9 @@ public class FPProfileEditActivity extends AppCompatActivity implements View.OnC
                                         @Override
                                         public void onSuccess(Uri uri) {
                                             Profile profile = new Profile();
-                                            profile.setName(SaveData.getInstance().getUser().getName());
+                                            profile.setName(App.getInstance().getUser().getName());
                                             profile.setAvatarUrl(uri.toString());
-                                            profileRef.child(SaveData.getInstance().getUser().getPhone()).setValue(profile);
+                                            profileRef.child(App.getInstance().getUser().getPhone()).setValue(profile);
                                         }
                                     });
                         }
@@ -213,7 +213,7 @@ public class FPProfileEditActivity extends AppCompatActivity implements View.OnC
 
     private void getProfileAvatar() {
 
-        profileRef.child(SaveData.getInstance().getPhoneNumber()).addValueEventListener(new ValueEventListener() {
+        profileRef.child(App.getInstance().getPhoneNumber()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot != null) {
