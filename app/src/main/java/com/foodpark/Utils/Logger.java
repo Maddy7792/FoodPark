@@ -10,6 +10,7 @@ import android.util.Log;
  */
 
 public class Logger {
+    //debug Logs
     public static void d(String tag, String msg) {
         if (App.IS_DEBUG) {
             Log.e(tag, msg);

@@ -1,7 +1,6 @@
 package com.foodpark.profile;
 
 import android.graphics.Color;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +8,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,14 +18,18 @@ import com.foodpark.R;
 import com.foodpark.TouchHelpers.RecyclerItemTouchHelperLister;
 import com.foodpark.TouchHelpers.RecyclervItemTouchHelper;
 import com.foodpark.Utils.AppConstants;
-import com.foodpark.ViewHolders.FavouritesViewAdapter;
+import com.foodpark.Adapters.FavouritesViewAdapter;
+import com.foodpark.Utils.Utils;
+import com.foodpark.activities.FoodDetailsActivity;
 import com.foodpark.application.App;
+import com.foodpark.callback.OnItemClickListener;
 import com.foodpark.database.Database;
 import com.foodpark.model.Favourites;
 
 import java.util.List;
 
-public class FPFavouriteActivity extends AppCompatActivity implements RecyclerItemTouchHelperLister {
+public class FPFavouriteActivity extends AppCompatActivity implements
+        RecyclerItemTouchHelperLister,OnItemClickListener {
 
     RecyclerView fpRVFavourites;
     FavouritesViewAdapter favouritesViewAdapter;
@@ -54,6 +59,7 @@ public class FPFavouriteActivity extends AppCompatActivity implements RecyclerIt
                 ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(fpRVFavourites);
         getFavouritesFoods();
+        Utils.runLayoutAnimation(fpRVFavourites,R.anim.layout_animation_fall_down);
 
     }
 
@@ -63,6 +69,7 @@ public class FPFavouriteActivity extends AppCompatActivity implements RecyclerIt
         favouritesViewAdapter.setFavData(favourites);
         fpRVFavourites.setAdapter(favouritesViewAdapter);
         favouritesViewAdapter.notifyDataSetChanged();
+
     }
 
     @Override
@@ -76,9 +83,9 @@ public class FPFavouriteActivity extends AppCompatActivity implements RecyclerIt
             favouritesViewAdapter.removeFavourite(holder.getAdapterPosition());
             new Database(this).removeFavourite(deleteItem.getFoodId(),App.getInstance().getPhoneNumber());
 
-            Snackbar snackbar = Snackbar.make(rootView,name+"removed from favourites",Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(rootView,name +" removed from favourites",Snackbar.LENGTH_LONG);
 
-            snackbar.setAction("UNDO", new View.OnClickListener() {
+            snackbar.setAction(AppConstants.KEY_UNDO, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                         favouritesViewAdapter.reInsertedFavouriteItem(deleteItem,deleteIndex);
@@ -88,5 +95,12 @@ public class FPFavouriteActivity extends AppCompatActivity implements RecyclerIt
             snackbar.setActionTextColor(Color.YELLOW);
             snackbar.show();
         }
+    }
+
+    @Override
+    public void OnClick(View view, int FoodId, boolean isLongClick) {
+        Log.e("Fav-Activity",""+FoodId);
+        Utils.dataIntent(FPFavouriteActivity.this, FoodDetailsActivity.class,AppConstants.KEY_FOODID,
+                String.valueOf(FoodId));
     }
 }

@@ -1,4 +1,4 @@
-package com.foodpark.Utils;
+package com.foodpark.customviews;
 
 import android.content.Context;
 import android.graphics.Bitmap;

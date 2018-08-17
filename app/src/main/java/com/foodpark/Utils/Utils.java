@@ -14,6 +14,7 @@ import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.RecyclerView;
 import android.telephony.SmsManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -21,6 +22,8 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
@@ -236,4 +239,20 @@ public class Utils {
         return csl;
     }
 
+
+    public static void dataIntent(Activity source, Class<?> destination,String key, String data) {
+        Intent intent = new Intent(source, destination);
+        intent.putExtra(key, data);
+        source.startActivity(intent);
+    }
+
+    public static void runLayoutAnimation(RecyclerView recyclerView, int animationLayout){
+        final Context context = recyclerView.getContext();
+        final LayoutAnimationController controller =
+                AnimationUtils.loadLayoutAnimation(context, animationLayout);
+
+        recyclerView.setLayoutAnimation(controller);
+        recyclerView.getAdapter().notifyDataSetChanged();
+        recyclerView.scheduleLayoutAnimation();
+    }
 }

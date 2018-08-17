@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.foodpark.Interfaces.OnItemClickListener;
+import com.foodpark.callback.OnItemClickListener;
 import com.foodpark.R;
 
 /**

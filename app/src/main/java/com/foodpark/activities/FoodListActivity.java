@@ -11,7 +11,7 @@ import android.text.TextWatcher;
 import android.view.View;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.foodpark.Interfaces.OnItemClickListener;
+import com.foodpark.callback.OnItemClickListener;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.ViewHolders.FoodListViewHolder;

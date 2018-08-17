@@ -22,28 +22,19 @@ import com.foodpark.Common.Common;
 import com.foodpark.Common.Config;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
-import com.foodpark.ViewHolders.CartAdapter;
+import com.foodpark.Adapters.CartAdapter;
 import com.foodpark.database.Database;
 import com.foodpark.model.Order;
 import com.foodpark.model.Request;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
-import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
-import com.paypal.android.sdk.payments.PaymentActivity;
-import com.paypal.android.sdk.payments.PaymentConfirmation;
 
-import org.json.JSONObject;
-
-import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import static android.app.Activity.RESULT_CANCELED;
-import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by dennis on 26/5/18.

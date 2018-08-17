@@ -1,4 +1,4 @@
-package com.foodpark.ViewHolders;
+package com.foodpark.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.foodpark.R;
+import com.foodpark.ViewHolders.CartViewHolder;
 import com.foodpark.model.Order;
 
 import java.text.NumberFormat;

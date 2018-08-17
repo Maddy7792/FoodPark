@@ -1,7 +1,8 @@
-package com.foodpark.ViewHolders;
+package com.foodpark.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.foodpark.R;
+import com.foodpark.callback.OnItemClickListener;
 import com.foodpark.model.Favourites;
-import com.foodpark.profile.FPFavouriteActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -21,9 +22,11 @@ public class FavouritesViewAdapter extends RecyclerView.Adapter<FavouritesViewAd
 
     private Context context;
     private List<Favourites> favourites;
+    private OnItemClickListener onItemClickListener;
 
     public FavouritesViewAdapter(Context context) {
         this.context = context;
+        onItemClickListener = (OnItemClickListener)context;
     }
 
     @NonNull
@@ -48,11 +51,12 @@ public class FavouritesViewAdapter extends RecyclerView.Adapter<FavouritesViewAd
         this.favourites = favourites;
     }
 
-    public class FavouriteViewHolder extends RecyclerView.ViewHolder {
+    public class FavouriteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public LinearLayout fpForeGround;
         public ImageView fpIVImage;
         public TextView fFoodName;
         public TextView fFoodDesc;
+        public CardView fpFavCard;
 
         public FavouriteViewHolder(View itemView) {
             super(itemView);
@@ -60,12 +64,21 @@ public class FavouritesViewAdapter extends RecyclerView.Adapter<FavouritesViewAd
             fFoodName = itemView.findViewById(R.id.fp_tv_fav_food_name);
             fFoodDesc = itemView.findViewById(R.id.fp_tv_fav_desc);
             fpForeGround = itemView.findViewById(R.id.fp_ll_foreground);
+            fpFavCard = itemView.findViewById(R.id.fp_fav_card);
         }
 
         public void onBind(List<Favourites> favourites, int position) {
-            Picasso.with(context).load(favourites.get(position).getFoodImage()).placeholder(R.drawable.food).into(fpIVImage);
+            Picasso.with(context).load(favourites.get(position).getFoodImage())
+                    .placeholder(R.drawable.food).into(fpIVImage);
             fFoodDesc.setText(favourites.get(position).getFoodDescription());
             fFoodName.setText(favourites.get(position).getFoodName());
+            fpFavCard.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            onItemClickListener.OnClick(v,Integer.parseInt(favourites.get(getAdapterPosition()).getFoodId()),false);
         }
     }
 

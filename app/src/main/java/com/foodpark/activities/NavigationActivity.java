@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.foodpark.Common.Common;
-import com.foodpark.Interfaces.OnItemClickListener;
+import com.foodpark.callback.OnItemClickListener;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.ViewHolders.MenuViewHolder;

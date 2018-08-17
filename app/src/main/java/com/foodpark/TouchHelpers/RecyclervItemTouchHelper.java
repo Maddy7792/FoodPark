@@ -5,9 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
-import com.foodpark.ViewHolders.CartAdapter;
 import com.foodpark.ViewHolders.CartViewHolder;
-import com.foodpark.ViewHolders.FavouritesViewAdapter;
+import com.foodpark.Adapters.FavouritesViewAdapter;
 
 public class RecyclervItemTouchHelper extends ItemTouchHelper.SimpleCallback {
 

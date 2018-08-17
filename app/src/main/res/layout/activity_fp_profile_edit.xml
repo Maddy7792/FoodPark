@@ -44,7 +44,7 @@
         android:layout_below="@+id/fp_rl_tool"
         android:layout_marginTop="20dp">
 
-        <com.foodpark.Utils.FPCircularImageView
+        <com.foodpark.customviews.FPCircularImageView
             android:id="@+id/fp_iv_profile_avatar"
             android:layout_width="100dp"
             android:layout_height="100dp"

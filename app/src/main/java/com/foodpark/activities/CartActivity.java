@@ -1,6 +1,5 @@
 package com.foodpark.activities;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,9 +16,8 @@ import android.widget.Toast;
 import com.foodpark.Common.Common;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
-import com.foodpark.ViewHolders.CartAdapter;
+import com.foodpark.Adapters.CartAdapter;
 import com.foodpark.database.Database;
-import com.foodpark.model.Food;
 import com.foodpark.model.Order;
 import com.foodpark.model.Request;
 import com.google.firebase.database.DatabaseReference;

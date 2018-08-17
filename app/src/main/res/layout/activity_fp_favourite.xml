@@ -5,7 +5,8 @@
     android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.foodpark.profile.FPFavouriteActivity">
+    tools:context="com.foodpark.profile.FPFavouriteActivity"
+    android:background="@color/screenBackground">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/fp_fav_app_bar"

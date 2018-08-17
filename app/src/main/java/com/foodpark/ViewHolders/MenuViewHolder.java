@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.foodpark.Interfaces.OnItemClickListener;
+import com.foodpark.callback.OnItemClickListener;
 import com.foodpark.R;
 
 /**

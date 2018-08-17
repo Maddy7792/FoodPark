@@ -8,4 +8,5 @@
     <dimen name="offset">5dp</dimen>
     <dimen name="offsetZero">0dp</dimen>
     <dimen name="tool_height">60dp</dimen>
+    <integer name="anim_duration_medium"> 1000</integer>
 </resources>
