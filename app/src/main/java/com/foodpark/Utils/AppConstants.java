@@ -87,4 +87,5 @@ public class AppConstants {
 
     public static final String KEY_FAV = "Your Favourites";
     public static final String KEY_UNDO = "UNDO";
+    public static final String KEY_YOUR_CART = "Your Cart";
 }

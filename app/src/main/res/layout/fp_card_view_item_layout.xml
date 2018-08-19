@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/fp_tv_cart_food_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Food Name"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:layout_toLeftOf="@+id/fp_number_button"
+        />
+
+    <TextView
+        android:id="@+id/fp_tv_food_left_price_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="price"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:layout_below="@+id/fp_tv_cart_food_name"
+        android:layout_marginTop="5dp"
+        />
+
+    <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+        android:id="@+id/fp_number_button"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/fp_tv_cart_food_name"
+        app:backGroundColor="@color/colorPrimary"
+        app:finalNumber="20"
+        app:initialNumber="1"
+        app:textSize="8sp">
+    </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+    <TextView
+        android:id="@+id/fp_tv_food_right_price_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="price"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/fp_number_button"
+        android:textStyle="bold"/>
+    <View
+        android:layout_below="@+id/fp_tv_food_right_price_text"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="@color/screenBackground"
+        android:layout_marginTop="10dp"/>
+</RelativeLayout>

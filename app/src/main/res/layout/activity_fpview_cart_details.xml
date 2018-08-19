@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.FPViewCartDetailsActivity"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    tools:context=".activities.FPViewCartDetailsActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/fp_viewcart_app_bar"
@@ -27,8 +27,125 @@
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/ic_arrow_back" />
 
+            <TextView
+                android:id="@+id/fp_tv_viewcart_toolbar_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:fontFamily="@font/verdana"
+                android:textStyle="bold"
+                />
+
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/fp_rv_cardview_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:layout_below="@+id/fp_viewcart_app_bar">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/fp_rv_cardview_details"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/fp_tv_sub_total_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/subtotal"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/verdana"
+                android:layout_centerVertical="true"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/fp_tv_sub_total_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="amount"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/verdana"
+                android:layout_centerVertical="true"
+                android:textSize="15sp"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/fp_tv_taxes_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Taxes"
+                android:textStyle="bold"
+                android:fontFamily="@font/verdana"
+                android:layout_centerVertical="true"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/fp_tv_taxes_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="amount"
+                android:textStyle="bold"
+                android:fontFamily="@font/verdana"
+                android:layout_centerVertical="true"
+                android:textSize="12sp"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:background="@color/screenBackground"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/fp_tv_grand_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Grand Total"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/verdana"
+                android:layout_centerVertical="true"
+                android:textSize="17sp"/>
+
+            <TextView
+                android:id="@+id/fp_tv_grand_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="amount"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/verdana"
+                android:layout_centerVertical="true"
+                android:textSize="17sp"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>

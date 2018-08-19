@@ -51,11 +51,12 @@ public class CartFragment extends Fragment {
     private DatabaseReference cartReference;
     private String status = AppConstants.KEY_ORDER_PLACED;
     private String address;
+    int total;
 
     List<Order> carts;
     CartAdapter cartAdapter;
 
-    static PayPalConfiguration configuration =  new PayPalConfiguration()
+    static PayPalConfiguration configuration = new PayPalConfiguration()
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(Config.PAYPAL_CLIENT_KEY);
 
@@ -64,13 +65,14 @@ public class CartFragment extends Fragment {
 
     @Nullable
     @Override
+    @NonNull
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_cart_fragment, null);
         cartDatabase = FirebaseDatabase.getInstance();
         cartReference = cartDatabase.getReference(AppConstants.KEY_REQUESTS);
-        totalAmount = (TextView)view.findViewById(R.id.total_price);
-        btnPlaceOrder=(Button)view.findViewById(R.id.btn_place_order);
-        cartRecyclerView=(RecyclerView)view.findViewById(R.id.listCart);
+        totalAmount = (TextView) view.findViewById(R.id.total_price);
+        btnPlaceOrder = (Button) view.findViewById(R.id.btn_place_order);
+        cartRecyclerView = (RecyclerView) view.findViewById(R.id.listCart);
         cartRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         cartRecyclerView.setLayoutManager(layoutManager);
@@ -79,7 +81,11 @@ public class CartFragment extends Fragment {
         btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAlertDialogForAddress();
+
+                if (totalAmount != null && total > 0) {
+                    showAlertDialogForAddress();
+                }
+
             }
         });
         return view;
@@ -89,10 +95,10 @@ public class CartFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Intent intent = new Intent(getActivity(), PayPalService.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,configuration);
-        if (getActivity()!=null){
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, configuration);
+        if (getActivity() != null) {
             getActivity().startService(intent);
-        }else {
+        } else {
             Toast.makeText(getActivity(), "Activity is null", Toast.LENGTH_SHORT).show();
         }
 
@@ -104,7 +110,7 @@ public class CartFragment extends Fragment {
         alertDialog.setTitle("One More Step!");
         final EditText etAddress = new EditText(getActivity());
         LinearLayout.LayoutParams alertLinear = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT
-                ,LinearLayout.LayoutParams.MATCH_PARENT);
+                , LinearLayout.LayoutParams.MATCH_PARENT);
 
         etAddress.setLayoutParams(alertLinear);
 
@@ -120,7 +126,7 @@ public class CartFragment extends Fragment {
                         Common.currentUser.getName(),
                         address,
                         carts,
-                        totalAmount.getText().toString(),"0"
+                        totalAmount.getText().toString(), "0"
                 );
                 cartReference.child(String.valueOf(System.currentTimeMillis())).setValue(request);
                 new Database(getActivity()).deleteToCart();
@@ -139,22 +145,20 @@ public class CartFragment extends Fragment {
     }
 
     private void loadListFoodFromSqlite() {
-
         carts = new Database(getActivity()).getCarts();
-        cartAdapter = new CartAdapter(carts,getActivity());
+        cartAdapter = new CartAdapter(carts, getActivity());
         cartRecyclerView.setAdapter(cartAdapter);
+        total = 0;
 
-        int total = 0;
-
-        for (Order order:carts)
-            total+=(Integer.parseInt(order.getPrice()))*(Integer.parseInt(order.getQuantity()));
-        Locale locale = new Locale("en","US");
+        for (Order order : carts)
+            total += (Integer.parseInt(order.getPrice())) * (Integer.parseInt(order.getQuantity()));
+        Locale locale = new Locale("en", "US");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
         totalAmount.setText(fmt.format(total));
     }
 
 
-    private void restartFragment(){
+    private void restartFragment() {
         CartFragment fragment = null;
         if (getFragmentManager() != null) {
             fragment = (CartFragment)

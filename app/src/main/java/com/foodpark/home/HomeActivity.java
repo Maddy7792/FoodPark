@@ -3,6 +3,8 @@ package com.foodpark.home;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,12 +23,18 @@ import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.Utils.Utils;
 import com.foodpark.customviews.BottomNavigationViewBehaviour;
+import com.foodpark.customviews.BottomNotificationBadge;
+import com.foodpark.database.Database;
 import com.foodpark.dialogs.FPFilterDialog;
 import com.foodpark.home.BottomNavigation.fragHome.HomeFragment;
 import com.foodpark.home.BottomNavigation.fragOrder.OrdersFragment;
 import com.foodpark.home.BottomNavigation.fragProfile.ProfileFragment;
 import com.foodpark.home.BottomNavigation.fragSearch.SearchFragment;
 import com.foodpark.home.BottomNavigation.fragcart.CartFragment;
+import com.foodpark.model.Order;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
 
@@ -41,6 +50,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private TextView fpTVToolbarName;
     private CoordinatorLayout.LayoutParams layoutParams;
     private ImageView fpIVFilter;
+
+    private Database localDb;
+    private List<Order> ordersList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +70,26 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         fragmentManager = getSupportFragmentManager();
         fpBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigation);
         Utils.disableShiftMode(fpBottomNavigationView);
+        localDb = new Database(this);
         fpIVFilter.setOnClickListener(this);
         layoutParams = (CoordinatorLayout.LayoutParams) fpBottomNavigationView.getLayoutParams();
         layoutParams.setBehavior(new BottomNavigationViewBehaviour());
         fpTVToolbarName.setText(AppConstants.HOME);
         loadFragment(new HomeFragment(), AppConstants.HOME);
+
+
+
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ordersList = localDb.getCarts();
+        if (ordersList.size() > 0) {
+            BottomNotificationBadge.setBottomNotificationBadge(this, ordersList.size(),
+                    fpBottomNavigationView);
+        }
+    }
 
     @Override
     public void onClick(View view) {
@@ -112,8 +137,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         case R.id.fp_bn_cart:
                             fpTVToolbarName.setText(AppConstants.CART);
                             hideViews();
+                            BottomNotificationBadge.removeBottomNotificationBadge(HomeActivity.this,
+                                    fpBottomNavigationView);
                             fragment = new CartFragment();
-                            loadFragment(fragment,AppConstants.FRAGMENT_OTHER);
+                            loadFragment(fragment, AppConstants.FRAGMENT_OTHER);
                             return true;
                     }
                     return false;
@@ -146,15 +173,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-   /* @Override
-    public void onBackPressed() {
-        if(getFragmentManager().getBackStackEntryCount() == 0) {
-            super.onBackPressed();
-        }
-        else {
-            getSupportFragmentManager().popBackStack();
-        }
-    }*/
 
     private void hideViews() {
         fpIVFilter.setVisibility(View.GONE);
@@ -163,8 +181,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private void showViews() {
         fpIVFilter.setVisibility(View.VISIBLE);
     }
-
-
 
 
 }

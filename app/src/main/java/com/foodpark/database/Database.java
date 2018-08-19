@@ -68,11 +68,6 @@ public class Database extends SQLiteAssetHelper {
         db.execSQL(query);
     }
 
-    public void addToFavourite(String foodId, String UserPhone) {
-        SQLiteDatabase db = getReadableDatabase();
-        String query = String.format("INSERT INTO Favorites(FoodId,UserPhone) VALUES('%s','%s');", foodId, UserPhone);
-        db.execSQL(query);
-    }
 
     public void removeFavourite(String FoodId, String UserPhone) {
         SQLiteDatabase db = getReadableDatabase();
@@ -129,5 +124,21 @@ public class Database extends SQLiteAssetHelper {
                 favourites.getFoodMenuId(),
                 favourites.getUserPhone());
         db.execSQL(query);
+    }
+
+
+    public int getCountCards(){
+        int count =0;
+
+        SQLiteDatabase db = getReadableDatabase();
+        String query = String.format("SELECT COUNT(*) FROM OrderDetail");
+        Cursor cursor = db.rawQuery(query,null);
+        if (cursor.moveToFirst()){
+            do {
+                count = cursor.getInt(0);
+            }while (cursor.moveToNext());
+        }
+
+        return count;
     }
 }
