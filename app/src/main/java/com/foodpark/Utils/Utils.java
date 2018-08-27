@@ -232,7 +232,7 @@ public class Utils {
         return randomNumber;
     }
 
-    public ColorStateList setBottomTintColor(Context context){
+    public ColorStateList setBottomTintColor(Context context) {
         int colorInt = context.getResources().getColor(R.color.colorPrimary);
         ColorStateList csl = ColorStateList.valueOf(colorInt);
 
@@ -240,13 +240,13 @@ public class Utils {
     }
 
 
-    public static void dataIntent(Activity source, Class<?> destination,String key, String data) {
+    public static void dataIntent(Activity source, Class<?> destination, String key, String data) {
         Intent intent = new Intent(source, destination);
         intent.putExtra(key, data);
         source.startActivity(intent);
     }
 
-    public static void runLayoutAnimation(RecyclerView recyclerView, int animationLayout){
+    public static void runLayoutAnimation(RecyclerView recyclerView, int animationLayout) {
         final Context context = recyclerView.getContext();
         final LayoutAnimationController controller =
                 AnimationUtils.loadLayoutAnimation(context, animationLayout);
@@ -255,4 +255,8 @@ public class Utils {
         recyclerView.scheduleLayoutAnimation();
     }
 
+    public static double percentageCalculation(int totalAmount) {
+        double percentage = (totalAmount / 100) * 5;
+        return percentage;
+    }
 }

@@ -78,7 +78,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         loadFragment(new HomeFragment(), AppConstants.HOME);
 
 
-
     }
 
     @Override
@@ -150,7 +149,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private void loadFragment(Fragment fragment, String TAG) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fp_home, fragment);
+        Fragment curFrag = fragmentManager.getPrimaryNavigationFragment();
+        if (curFrag!=null){
+            transaction.detach(fragment);
+        }else {
+            transaction.replace(R.id.fp_home, fragment);
+        }
+
         final int count = fragmentManager.getBackStackEntryCount();
         if (TAG.equals(AppConstants.FRAGMENT_OTHER)) {
             transaction.addToBackStack(TAG);

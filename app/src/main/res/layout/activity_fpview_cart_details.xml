@@ -33,11 +33,11 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
+                android:fontFamily="@font/verdana"
                 android:gravity="center"
                 android:textSize="20sp"
-                android:fontFamily="@font/verdana"
                 android:textStyle="bold"
-                />
+                android:textColor="@android:color/black"/>
 
         </android.support.v7.widget.Toolbar>
 
@@ -47,17 +47,21 @@
         android:id="@+id/fp_rv_cardview_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/fp_viewcart_app_bar"
         android:fitsSystemWindows="true"
-        android:layout_below="@+id/fp_viewcart_app_bar">
+        android:layout_margin="8dp">
 
     </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
+        android:id="@+id/fp_ll_amount_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_below="@+id/fp_rv_cardview_details"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -68,25 +72,26 @@
                 android:id="@+id/fp_tv_sub_total_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/subtotal"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:fontFamily="@font/verdana"
                 android:layout_centerVertical="true"
-                android:textSize="15sp"/>
+                android:fontFamily="@font/verdana"
+                android:text="@string/subtotal"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/fp_tv_sub_total_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="amount"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:fontFamily="@font/verdana"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:fontFamily="@font/verdana"
+                android:text="amount"
+                android:textColor="@android:color/black"
                 android:textSize="15sp"
-                android:layout_alignParentRight="true"/>
+                android:textStyle="bold" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -96,56 +101,57 @@
                 android:id="@+id/fp_tv_taxes_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Taxes"
-                android:textStyle="bold"
-                android:fontFamily="@font/verdana"
                 android:layout_centerVertical="true"
-                android:textSize="12sp"/>
+                android:fontFamily="@font/verdana"
+                android:text="Taxes"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/fp_tv_taxes_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="amount"
-                android:textStyle="bold"
-                android:fontFamily="@font/verdana"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:fontFamily="@font/verdana"
+                android:text="amount"
                 android:textSize="12sp"
-                android:layout_alignParentRight="true"/>
+                android:textStyle="bold" />
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1.5dp"
-            android:background="@color/screenBackground"/>
+            android:background="@color/screenBackground" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/fp_tv_grand_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Grand Total"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:fontFamily="@font/verdana"
                 android:layout_centerVertical="true"
-                android:textSize="17sp"/>
+                android:fontFamily="@font/verdana"
+                android:text="Grand Total"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/fp_tv_grand_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="amount"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:fontFamily="@font/verdana"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:fontFamily="@font/verdana"
+                android:text="amount"
+                android:textColor="@android:color/black"
                 android:textSize="17sp"
-                android:layout_alignParentRight="true"/>
+                android:textStyle="bold" />
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

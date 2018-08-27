@@ -35,7 +35,7 @@
         android:layout_alignTop="@+id/fp_tv_cart_food_name"
         app:backGroundColor="@color/colorPrimary"
         app:finalNumber="20"
-        app:initialNumber="1"
+        app:initialNumber="0"
         app:textSize="8sp">
     </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
     <TextView

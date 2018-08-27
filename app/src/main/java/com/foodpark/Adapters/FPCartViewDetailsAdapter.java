@@ -7,9 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.foodpark.R;
+import com.foodpark.Utils.AppConstants;
+import com.foodpark.Utils.Logger;
 import com.foodpark.ViewHolders.FPCartViewDetailsViewHolder;
 import com.foodpark.activities.FPViewCartDetailsActivity;
+import com.foodpark.callback.OnDeleteItem;
+import com.foodpark.model.Favourites;
 import com.foodpark.model.Order;
 
 import java.util.List;
@@ -18,9 +23,11 @@ public class FPCartViewDetailsAdapter extends RecyclerView.Adapter<FPCartViewDet
 
     private Context context;
     private List<Order> orderList;
+    private OnDeleteItem onDeleteItem;
 
     public FPCartViewDetailsAdapter(Context context) {
         this.context = context;
+        onDeleteItem = (OnDeleteItem)context;
     }
 
     @NonNull
@@ -32,11 +39,23 @@ public class FPCartViewDetailsAdapter extends RecyclerView.Adapter<FPCartViewDet
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FPCartViewDetailsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final FPCartViewDetailsViewHolder holder, final int position) {
         holder.mCartFoodName.setText(orderList.get(position).getProductName());
         holder.mOrderNumber.setNumber(orderList.get(position).getQuantity());
-        holder.mCartPrice.setText(orderList.get(position).getPrice());
+        holder.mCartPrice.setText(getPrice(orderList.get(position).getPrice()));
+        holder.mCartTextRightPrice.setText(getPrice(orderList.get(position).getPrice()));
+        holder.mOrderNumber.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
+            @Override
+            public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
+                onDeleteItem.OnDelete(holder,position,newValue);
+                /*if (newValue<1){
+                    remove(position);
+                }*/
+            }
+        });
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -45,5 +64,19 @@ public class FPCartViewDetailsAdapter extends RecyclerView.Adapter<FPCartViewDet
 
     public void setData(List<Order> orderList) {
         this.orderList = orderList;
+    }
+
+    public String getPrice(String price){
+        return AppConstants.RUPEE_SYMBOL+price+".00";
+    }
+
+    public void remove(int position){
+        orderList.remove(position);
+        notifyItemRemoved(position);
+        notifyDataSetChanged();
+    }
+
+    public Order getItem(int position){
+        return orderList.get(position);
     }
 }

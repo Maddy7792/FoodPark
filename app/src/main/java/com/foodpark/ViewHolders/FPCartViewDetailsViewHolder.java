@@ -20,4 +20,6 @@ public class FPCartViewDetailsViewHolder extends RecyclerView.ViewHolder {
         mCartTextRightPrice = itemView.findViewById(R.id.fp_tv_food_right_price_text);
         mOrderNumber = itemView.findViewById(R.id.fp_number_button);
     }
+
+
 }

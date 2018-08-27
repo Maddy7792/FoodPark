@@ -75,6 +75,12 @@ public class Database extends SQLiteAssetHelper {
         db.execSQL(query);
     }
 
+    public void removeCartItem(String ProductId) {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = String.format("DELETE FROM OrderDetail WHERE ProductId='%s';", ProductId);
+        db.execSQL(query);
+    }
+
     public boolean isFavourite(String FoodId, String UserPhone) {
         SQLiteDatabase db = getReadableDatabase();
         String query = String.format("SELECT * FROM Favorites WHERE FoodId='%s' and UserPhone='%s';", FoodId, UserPhone);
@@ -129,7 +135,6 @@ public class Database extends SQLiteAssetHelper {
 
     public int getCountCards(){
         int count =0;
-
         SQLiteDatabase db = getReadableDatabase();
         String query = String.format("SELECT COUNT(*) FROM OrderDetail");
         Cursor cursor = db.rawQuery(query,null);

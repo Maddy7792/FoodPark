@@ -13,6 +13,7 @@ import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.Utils.Utils;
 import com.foodpark.activities.CartActivity;
+import com.foodpark.activities.FPViewCartDetailsActivity;
 import com.foodpark.profile.FPFavouriteActivity;
 import com.foodpark.profile.FPOtherSettingsActivity;
 import com.foodpark.profile.FPPaymentActivity;
@@ -65,12 +66,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             Utils.setNormalIntent(getActivity(), FPPaymentActivity.class);
         }
         if (Id == R.id.fp_ll_help) {
-            Intent intent = new Intent(getActivity(), CartActivity.class);
-            startActivity(intent);
-            //Utils.setDataIntent(getActivity(), FPOtherSettingsActivity.class, AppConstants.HELP);
+            Utils.setDataIntent(getActivity(), FPOtherSettingsActivity.class, AppConstants.HELP);
         }
         if (Id == R.id.fp_ll_freefood) {
-            Utils.setDataIntent(getActivity(), FPOtherSettingsActivity.class, AppConstants.FREE_FOOD);
+            Intent intent = new Intent(getActivity(), FPViewCartDetailsActivity.class);
+            startActivity(intent);
+           // Utils.setDataIntent(getActivity(), FPOtherSettingsActivity.class, AppConstants.FREE_FOOD);
         }
         if (Id == R.id.fp_ll_promotions) {
             Utils.setDataIntent(getActivity(), FPOtherSettingsActivity.class, AppConstants.PROMOTIONS);
