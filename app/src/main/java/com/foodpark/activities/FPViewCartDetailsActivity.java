@@ -18,12 +18,14 @@ import com.foodpark.Utils.AppConstants;
 import com.foodpark.Utils.Logger;
 import com.foodpark.Utils.Utils;
 import com.foodpark.ViewHolders.FPCartViewDetailsViewHolder;
+import com.foodpark.application.App;
 import com.foodpark.callback.OnDeleteItem;
 import com.foodpark.database.Database;
 import com.foodpark.model.Favourites;
 import com.foodpark.model.Order;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -69,8 +71,7 @@ public class FPViewCartDetailsActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
-
-        if (localDb.getCountCards()>0){
+        if (localDb.getCountCards(App.getInstance().getPhoneNumber())>0){
             fpLLAmountDetails.setVisibility(View.VISIBLE);
         }else {
             fpLLAmountDetails.setVisibility(View.GONE);
@@ -88,7 +89,7 @@ public class FPViewCartDetailsActivity extends AppCompatActivity
 
     private void getOrderDetails() {
         localDb = new Database(this);
-        orderList = localDb.getCarts();
+        orderList = localDb.getCarts(App.getInstance().getPhoneNumber());
         fpCartViewDetailsAdapter = new FPCartViewDetailsAdapter(this);
         fpCartViewDetailsAdapter.setData(orderList);
         fpRVCartDetails.setAdapter(fpCartViewDetailsAdapter);
@@ -106,14 +107,43 @@ public class FPViewCartDetailsActivity extends AppCompatActivity
     @Override
     public void OnDelete(RecyclerView.ViewHolder viewHolder, int position, int numberValue) {
         if (viewHolder instanceof FPCartViewDetailsViewHolder){
-            Logger.d("Number--ElegantNumber","---"+numberValue);
+            Logger.d("Number--ElegantNumber-D","---"+numberValue);
             if (numberValue<1){
                 final Order deleteItem = ((FPCartViewDetailsAdapter)fpRVCartDetails.getAdapter())
                         .getItem(viewHolder.getAdapterPosition());
                 fpCartViewDetailsAdapter.remove(position);
+                fpCartViewDetailsAdapter.notifyItemRemoved(position);
                 new Database(this).removeCartItem(deleteItem.getProductId());
-
+                if (localDb.getCountCards(App.getInstance().getPhoneNumber())<1){
+                    FPViewCartDetailsActivity.this.finish();
+                    fpLLAmountDetails.setVisibility(View.GONE);
+                }
+                fpCartViewDetailsAdapter.notifyDataSetChanged();
             }
+
+            fpCartViewDetailsAdapter.notifyDataSetChanged();
+
         }
+    }
+
+    @Override
+    public void OnUpdate(RecyclerView.ViewHolder viewHolder, int position, int numberValue) {
+        Logger.d("Number--ElegantNumber-U","---"+numberValue);
+        Order order = orderList.get(position);
+        order.setQuantity(String.valueOf(numberValue));
+        new Database(this).UpdateCart(order);
+        List<Order> orders = new Database(this).getCarts(App.getInstance().getPhoneNumber());
+        total = 0;
+        for (Order item: orders){
+            total+=(Integer.parseInt(item.getPrice()))*(Integer.parseInt(item.getQuantity()));
+            Locale locale = new Locale("en","in");
+            NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
+            fpTVSubTotalAmount.setText(fmt.format(total));
+            fpTVTaxesAmount.setText(fmt.format(Utils.percentageCalculation(total)));
+            fpTVGrandAmount.setText(fmt.format(total+Utils.percentageCalculation(total)));
+        }
+
+        fpCartViewDetailsAdapter.notifyDataSetChanged();
+
     }
 }

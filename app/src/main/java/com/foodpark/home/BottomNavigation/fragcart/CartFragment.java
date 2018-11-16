@@ -23,6 +23,8 @@ import com.foodpark.Common.Config;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.Adapters.CartAdapter;
+import com.foodpark.Utils.Logger;
+import com.foodpark.application.App;
 import com.foodpark.database.Database;
 import com.foodpark.model.Order;
 import com.foodpark.model.Request;
@@ -129,7 +131,7 @@ public class CartFragment extends Fragment {
                         totalAmount.getText().toString(), "0"
                 );
                 cartReference.child(String.valueOf(System.currentTimeMillis())).setValue(request);
-                new Database(getActivity()).deleteToCart();
+                new Database(getActivity()).deleteToCart(App.getInstance().getPhoneNumber());
                 restartFragment();
                 Toast.makeText(getActivity(), "Thank You, Order place", Toast.LENGTH_SHORT).show();
             }
@@ -145,7 +147,8 @@ public class CartFragment extends Fragment {
     }
 
     private void loadListFoodFromSqlite() {
-        carts = new Database(getActivity()).getCarts();
+        carts = new Database(getActivity()).getCarts(App.getInstance().getPhoneNumber());
+        Logger.d("Cart-Items",""+carts.size());
         cartAdapter = new CartAdapter(carts, getActivity());
         cartRecyclerView.setAdapter(cartAdapter);
         total = 0;

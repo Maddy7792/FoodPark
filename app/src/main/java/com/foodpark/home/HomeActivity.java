@@ -21,7 +21,9 @@ import android.widget.TextView;
 
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
+import com.foodpark.Utils.Logger;
 import com.foodpark.Utils.Utils;
+import com.foodpark.application.App;
 import com.foodpark.customviews.BottomNavigationViewBehaviour;
 import com.foodpark.customviews.BottomNotificationBadge;
 import com.foodpark.database.Database;
@@ -83,9 +85,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
-        ordersList = localDb.getCarts();
-        if (ordersList.size() > 0) {
-            BottomNotificationBadge.setBottomNotificationBadge(this, ordersList.size(),
+        if (localDb.getCountCards(App.getInstance().getPhoneNumber()) > 0) {
+            BottomNotificationBadge.setBottomNotificationBadge(this, localDb.getCountCards(App.getInstance().getPhoneNumber()),
                     fpBottomNavigationView);
         }
     }
@@ -157,6 +158,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         final int count = fragmentManager.getBackStackEntryCount();
+        Logger.d("Fragment-count",""+count +"--curFrag--"+curFrag);
         if (TAG.equals(AppConstants.FRAGMENT_OTHER)) {
             transaction.addToBackStack(TAG);
         }

@@ -17,6 +17,7 @@ import com.foodpark.Common.Common;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
 import com.foodpark.Adapters.CartAdapter;
+import com.foodpark.application.App;
 import com.foodpark.database.Database;
 import com.foodpark.model.Order;
 import com.foodpark.model.Request;
@@ -91,7 +92,7 @@ public class CartActivity extends AppCompatActivity {
                 );
 
                 cartReference.child(String.valueOf(System.currentTimeMillis())).setValue(request);
-                new Database(CartActivity.this).deleteToCart();
+                new Database(CartActivity.this).deleteToCart(App.getInstance().getPhoneNumber());
                 Toast.makeText(CartActivity.this, "Thank You, Order place", Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -108,7 +109,7 @@ public class CartActivity extends AppCompatActivity {
 
     private void loadListFoodFromSqlite() {
 
-        carts = new Database(this).getCarts();
+        carts = new Database(this).getCarts(App.getInstance().getPhoneNumber());
         cartAdapter = new CartAdapter(carts,this);
         cartRecyclerView.setAdapter(cartAdapter);
 

@@ -6,13 +6,15 @@ package com.foodpark.model;
 
 public class Order {
 
+    private String UserPhone;
     private String ProductId;
     private String ProductName;
     private String Quantity;
     private String Price;
     private String Discount;
 
-    public Order(String productId, String productName, String quantity, String price, String discount) {
+    public Order(String userPhone, String productId, String productName, String quantity, String price, String discount) {
+        UserPhone = userPhone;
         ProductId = productId;
         ProductName = productName;
         Quantity = quantity;
@@ -21,6 +23,14 @@ public class Order {
     }
 
     public Order() {
+    }
+
+    public String getUserPhone() {
+        return UserPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        UserPhone = userPhone;
     }
 
     public String getProductId() {

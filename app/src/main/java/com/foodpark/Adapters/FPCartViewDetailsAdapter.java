@@ -28,6 +28,7 @@ public class FPCartViewDetailsAdapter extends RecyclerView.Adapter<FPCartViewDet
     public FPCartViewDetailsAdapter(Context context) {
         this.context = context;
         onDeleteItem = (OnDeleteItem)context;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -47,10 +48,13 @@ public class FPCartViewDetailsAdapter extends RecyclerView.Adapter<FPCartViewDet
         holder.mOrderNumber.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
             @Override
             public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
-                onDeleteItem.OnDelete(holder,position,newValue);
-                /*if (newValue<1){
-                    remove(position);
-                }*/
+                Logger.d("Number",""+newValue);
+                if (newValue>=1){
+                    onDeleteItem.OnUpdate(holder,position,newValue);
+                }else if (newValue==0){
+                    onDeleteItem.OnDelete(holder,position,newValue);
+                }
+
             }
         });
     }

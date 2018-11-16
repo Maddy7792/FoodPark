@@ -17,6 +17,7 @@ import android.widget.Toolbar;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.foodpark.R;
 import com.foodpark.Utils.AppConstants;
+import com.foodpark.application.App;
 import com.foodpark.database.Database;
 import com.foodpark.model.Food;
 import com.foodpark.model.Order;
@@ -61,12 +62,11 @@ public class FoodDetailsActivity extends AppCompatActivity implements View.OnCli
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppbar);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppbar);
-
-
         mBtnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new Database(getBaseContext()).addToCart(new Order(
+                        App.getInstance().getPhoneNumber(),
                         foodId,
                         food.getName(),
                         numberButton.getNumber(),
